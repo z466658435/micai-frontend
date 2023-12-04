@@ -240,7 +240,7 @@ function Article() {
       const res = await axios.get(`/back/article/single/${id}`)
       if (res.data.img) {
         const photo_image = await axios.get(
-          `/article_photo/${res.data.img}?userid=${currentUser.id}`,
+          `/picture/article_photo/${res.data.img}?userid=${currentUser.id}`,
           {
             responseType: 'blob', // 设置响应类型为 Blob
           }
@@ -307,7 +307,7 @@ function Article() {
           res.data.map(async (item, index) => {
             if (item.img) {
               const photo_image = await axios.get(
-                `/article_photo/${item.img}?userid=${currentUser.id}`,
+                `/picture/article_photo/${item.img}?userid=${currentUser.id}`,
                 {
                   responseType: 'blob', // 设置响应类型为 Blob
                 }
@@ -336,7 +336,7 @@ function Article() {
             avatar = avatar0
           } else {
             const avatar_image = await axios.get(
-              `/image/${user_img}?userid=${user_id}`,
+              `/picture/image/${user_img}?userid=${user_id}`,
               {
                 responseType: 'blob', // 设置响应类型为 Blob
               }

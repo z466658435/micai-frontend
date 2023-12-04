@@ -117,7 +117,7 @@ function Mem_pic() {
       await Promise.all(
         res.data.map(async (item, index) => {
           const photo_image = await axios.get(
-            `/photo/${item.img}?userid=${value}`,
+            `/picture/photo/${item.img}?userid=${value}`,
             {
               responseType: 'blob', // 设置响应类型为 Blob
             }

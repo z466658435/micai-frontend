@@ -38,7 +38,7 @@ const Navbar = () => {
             // console.log(22222)
             // console.log(userid)
             const avatar_image = await axios.get(
-              `/image/${imageurl}?userid=${userid}`,
+              `/picture/image/${imageurl}?userid=${userid}`,
               {
                 responseType: 'blob', // 设置响应类型为 Blob
               }

@@ -160,7 +160,7 @@ function Pic() {
         await Promise.all(
           res.data.map(async (item, index) => {
             const photo_image = await axios.get(
-              `/photo/${item.img}?userid=${currentUser.id}`,
+              `/picture/photo/${item.img}?userid=${currentUser.id}`,
               {
                 responseType: 'blob', // 设置响应类型为 Blob
               }

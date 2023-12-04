@@ -183,7 +183,7 @@ const Article = () => {
   useEffect(() => {
     const fetchdata = async () => {
       const type = 0
-      const res = await axios.get(`/art/${0}/${type}`)
+      const res = await axios.get(`/init_data/art/${0}/${type}`)
       console.log(res.data)
       //TOP5文章数据
       const artdata = res.data.map((item) => ({
@@ -237,7 +237,7 @@ const Article = () => {
         setAvatar(avatar0)
       } else {
         const avatar_image = await axios.get(
-          `/image/${user_img}?userid=${user_id}`,
+          `/picture/image/${user_img}?userid=${user_id}`,
           {
             responseType: 'blob', // 设置响应类型为 Blob
           }
@@ -247,7 +247,7 @@ const Article = () => {
       //2、文章封面图
       if (article_img) {
         const photo_image = await axios.get(
-          `/article_photo/${article_img}?userid=${user_id}`,
+          `/picture/article_photo/${article_img}?userid=${user_id}`,
           {
             responseType: 'blob', // 设置响应类型为 Blob
           }
@@ -360,7 +360,7 @@ const Article = () => {
               item.user_img = avatar0
             } else {
               const avatar_image = await axios.get(
-                `/image/${item.user_img}?userid=${item.user_id}`,
+                `/picture/image/${item.user_img}?userid=${item.user_id}`,
                 {
                   responseType: 'blob', // 设置响应类型为 Blob
                 }

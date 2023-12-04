@@ -139,14 +139,14 @@ const Register = () => {
         console.log(res.data)
         console.log(555)
         const recordinputs = {
-          operation: "Email 发送验证码",
+          operation: 'Email 发送验证码',
           resource_id: 0,
-          region: "江苏 南京",
+          region: '江苏 南京',
           user: reginputs.username,
-          access: "普通用户",
-          user_id: 0
+          access: '普通用户',
+          user_id: 0,
         }
-        const res1 = await axios.post('/record', recordinputs)//日志
+        const res1 = await axios.post('/record', recordinputs) //日志
         api.info({
           message: `邮箱验证码`,
           description: `已发送至您的邮箱，注意查收!`,

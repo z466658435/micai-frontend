@@ -138,7 +138,7 @@ function Mem_art() {
             res.data.map(async (item, index) => {
               if (item.img) {
                 const photo_image = await axios.get(
-                  `/article_photo/${item.img}?userid=${value}`,
+                  `/picture/article_photo/${item.img}?userid=${value}`,
                   {
                     responseType: 'blob', // 设置响应类型为 Blob
                   }
@@ -168,7 +168,7 @@ function Mem_art() {
               avatar = avatar0
             } else {
               const avatar_image = await axios.get(
-                `/image/${user_img}?userid=${user_id}`,
+                `/picture/image/${user_img}?userid=${user_id}`,
                 {
                   responseType: 'blob', // 设置响应类型为 Blob
                 }

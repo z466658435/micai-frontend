@@ -281,7 +281,7 @@ function Back() {
           avatardata = avatar0
         } else {
           const avatar_image = await axios.get(
-            `/image/${imageurl}?userid=${currentUser.id}`,
+            `/picture/image/${imageurl}?userid=${currentUser.id}`,
             {
               responseType: 'blob', // 设置响应类型为 Blob
             }

@@ -64,7 +64,7 @@ const Article = () => {
     var res
     if (type == 0) {
       //初始化 文章全拿
-      res = await axios.get(`/art/${0}/${0}`)
+      res = await axios.get(`/init_data/art/${0}/${0}`)
       console.log(type)
       console.log(res.data)
 
@@ -77,7 +77,7 @@ const Article = () => {
           avatarimg = avatar0
         } else {
           const avatar_image = await axios.get(
-            `/image/${item.user_img}?userid=${item.user_id}`,
+            `/picture/image/${item.user_img}?userid=${item.user_id}`,
             {
               responseType: 'blob', // 设置响应类型为 Blob
             }
@@ -87,7 +87,7 @@ const Article = () => {
         //文章图片
         if (item.img) {
           const photo_image = await axios.get(
-            `/article_photo/${item.img}?userid=${item.user_id}`,
+            `/picture/article_photo/${item.img}?userid=${item.user_id}`,
             {
               responseType: 'blob', // 设置响应类型为 Blob
             }
@@ -141,7 +141,7 @@ const Article = () => {
       }
     } else if (type == 1) {
       //搜索框 文章只拿查询作者姓名和文章标题包含搜索词的文章
-      res = await axios.get(`/art/${search_value}/${1}`)
+      res = await axios.get(`/init_data/art/${search_value}/${1}`)
       console.log(type)
       console.log(res.data)
 
@@ -154,7 +154,7 @@ const Article = () => {
           avatarimg = avatar0
         } else {
           const avatar_image = await axios.get(
-            `/image/${item.user_img}?userid=${item.user_id}`,
+            `/picture/image/${item.user_img}?userid=${item.user_id}`,
             {
               responseType: 'blob', // 设置响应类型为 Blob
             }
@@ -164,7 +164,7 @@ const Article = () => {
         //文章图片
         if (item.img) {
           const photo_image = await axios.get(
-            `/article_photo/${item.img}?userid=${item.user_id}`,
+            `/picture/article_photo/${item.img}?userid=${item.user_id}`,
             {
               responseType: 'blob', // 设置响应类型为 Blob
             }

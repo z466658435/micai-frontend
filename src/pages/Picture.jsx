@@ -84,7 +84,7 @@ const Picture = () => {
         return avatar0
       } else {
         const avatar_image = await axios.get(
-          `/image/${item.img}?userid=${item.id}`,
+          `/picture/image/${item.img}?userid=${item.id}`,
           {
             responseType: 'blob',
           }
@@ -166,7 +166,7 @@ const Picture = () => {
     const type = 2
     setSearchValue(value)
     try {
-      const res = await axios.get(`/pic/${value}/${type}`)
+      const res = await axios.get(`/init_data/pic/${value}/${type}`)
       updateImageUrls(res.data)
       setMembers(res.data)
       updateURL(currentPage, value, chooseCollege)
@@ -189,7 +189,7 @@ const Picture = () => {
     setChooseCollege(college)
     const type = 1
     try {
-      const res = await axios.get(`/pic/${college}/${type}`)
+      const res = await axios.get(`/init_data/pic/${college}/${type}`)
       updateImageUrls(res.data)
       setMembers(res.data)
       updateURL(currentPage, searchValue, college)
@@ -204,7 +204,7 @@ const Picture = () => {
     const type = 0
     const fetchall = async () => {
       try {
-        const res = await axios.get(`/pic/${0}/${type}`)
+        const res = await axios.get(`/init_data/pic/${0}/${type}`)
         const filter_data = res.data.filter((item) => item.img != '0')//只展示换过初始头像的用户
         updateImageUrls(filter_data)
         setMembers(filter_data)

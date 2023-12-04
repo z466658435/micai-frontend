@@ -87,7 +87,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/home`)
+        const res = await axios.get(`/init_data/home`)
         setOridata(res.data)
         setIsLoading(false) // 数据加载完成后设置 isLoading 为 false
       } catch (err) {
