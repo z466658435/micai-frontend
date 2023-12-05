@@ -4,7 +4,9 @@ import {
   Route,
   Outlet
 } from "react-router-dom"
-
+import React, { useEffect, useContext } from 'react'
+import { AuthContext } from './context/authContext'
+import { WebSocketProvider } from './context/webSocketContext'
 import Navbar from "./components/Navbar"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
@@ -13,8 +15,8 @@ import SinglePic from "./pages/SinglePic"
 import Article from "./pages/Article"
 import SingleArt from "./pages/SingleArt"
 import Back from "./pages/Back"
-
 import "./style.scss"
+
 const Layout = () => {
   return (
     <>
@@ -63,11 +65,13 @@ const router = createBrowserRouter([
 
 function App () {
   return (
-    <div className="app">
-      <div className="container">
-        <RouterProvider router={router}></RouterProvider>
+    <WebSocketProvider>
+      <div className="app">
+        <div className="container">
+          <RouterProvider router={router}></RouterProvider>
+        </div>
       </div>
-    </div>
+    </WebSocketProvider>
   )
 }
 

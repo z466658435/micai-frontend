@@ -1,10 +1,16 @@
-import React from 'react'
+import { React, useContext, useEffect, useState } from 'react'
 // import Logo from"../img/logo.png"
 import micaiLogo from '../static/img/micai.ico'
 import qqLogo from '../static/img/footer/qqlogo.png'
 import githubLogo from '../static/img/footer/githublogo.png'
 import { Col, Divider, Row } from 'antd'
+import { WebSocketContext } from '../context/webSocketContext'
 const Footer = () => {
+  const { clientCount } = useContext(WebSocketContext)
+  const [clientCounts, setClientCounts] = useState(0)
+  useEffect(() => {
+    setClientCounts(clientCount) //网站访问 客户端数量
+  }, [])
   return (
     <div className="footerbox">
       <div className="footer_first"></div>
@@ -57,7 +63,10 @@ const Footer = () => {
         </Row>
       </div>
       <div className="legalbox">
-        <div className="legal">CopyrightXXXXXX</div>
+        <div className="legal">
+          <p>CopyrightXXXXXX</p>
+          <p className='clientcounts'>本站目前访问人数：{clientCounts} 人</p>
+          </div>
       </div>
       {/* <span>
         Made with love and <b>React.js</b>

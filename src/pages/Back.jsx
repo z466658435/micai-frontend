@@ -192,6 +192,8 @@ var admin_access = false
 // ]
 
 function Back() {
+  const navigate = useNavigate()
+  const { currentUser } = useContext(AuthContext)
   const [selectedOption, setSelectedOption] = useState('profile')
   const [info, setInfo] = useState({})
 
@@ -265,8 +267,6 @@ function Back() {
     }
   }
 
-  const { currentUser } = useContext(AuthContext)
-  const navigate = useNavigate()
   // const location = useLocation()
   useEffect(() => {
     if (!currentUser) {

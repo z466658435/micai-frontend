@@ -190,7 +190,7 @@ function Mem_art() {
             comments_num: `${
               item.comments ? JSON.parse(item.comments).comments_num : '0'
             }`,
-            readings: `${Math.floor(item.readings / 2)}`,
+            readings: `${Math.floor(item.readings )}`,
           }))
           data.sort((a, b) => new Date(b.date) - new Date(a.date))
           setArticledata(data)

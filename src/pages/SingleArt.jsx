@@ -54,6 +54,7 @@ const Article = () => {
   const [modalText1, setModalText1] = useState('您确认是否删除该子评论？')
   const [index0_id, setIndex0_id] = useState(0) //删除 选中评论ID值
   const [index1_id, setIndex1_id] = useState(0) //删除 选中子评论ID值
+  const [commentAvatar, setCommentAvatar] = useState(avatar0) //评论头像
 
   const articleContentRef = useRef(null) //floatblock的DOM
   const commentsRef = useRef(null) //评论Box
@@ -185,6 +186,7 @@ const Article = () => {
       const type = 0
       const res = await axios.get(`/init_data/art/${0}/${type}`)
       console.log(res.data)
+
       //TOP5文章数据
       const artdata = res.data.map((item) => ({
         id: `${item.id}`,
@@ -192,7 +194,7 @@ const Article = () => {
         title: `${item.title}`,
         topdescription: `${item.user_name}`,
         category: `${cate(item.category)}`,
-        readings: `${Math.floor(item.readings / 2)}`,
+        readings: `${Math.floor(item.readings)}`,
         post_date: `${formatDate(item.post_date)} `,
         author: item.user_uuid,
       }))
@@ -203,13 +205,7 @@ const Article = () => {
           .sort((a, b) => b.readings - a.readings)
           .slice(0, 5)
       )
-      // console.log(
-      //   artdata
-      //     .filter((item) => item.author == article_user_uuid)
-      //     .sort((a, b) => b.readings - a.readings)
-      //     .slice(0, 5)
-      // )
-      // console.log(artdata)
+
       //单个文章数据
       const single_article_data = res.data.find((item) => item.id == article_id)
       console.log(single_article_data)
@@ -232,6 +228,7 @@ const Article = () => {
       // console.log(article_img)
       // console.log(user_img)
       // console.log(user_id)
+
       //1、文章作者头像
       if (user_img == '0') {
         setAvatar(avatar0)
@@ -244,6 +241,7 @@ const Article = () => {
         )
         setAvatar(URL.createObjectURL(avatar_image.data))
       }
+
       //2、文章封面图
       if (article_img) {
         const photo_image = await axios.get(
@@ -257,7 +255,31 @@ const Article = () => {
       } else {
         setArticleimg(null)
       }
+
+      //评论输入框头像
+      if (currentUser) {
+        try {
+          const imageurl = currentUser.img
+          const userid = currentUser.id
+          if (imageurl == '0') {
+            setCommentAvatar(avatar0)
+          } else {
+            // console.log(22222)
+            // console.log(userid)
+            const avatar_image = await axios.get(
+              `/picture/image/${imageurl}?userid=${userid}`,
+              {
+                responseType: 'blob', // 设置响应类型为 Blob
+              }
+            )
+            setCommentAvatar(URL.createObjectURL(avatar_image.data))
+          }
+        } catch (err) {
+          console.log(err)
+        }
+      }
     }
+
     //页面拿到数据的同时阅读量+1
     const readingsADD = async () => {
       try {
@@ -267,6 +289,7 @@ const Article = () => {
         console.log(err)
       }
     }
+
     //获取删评权限
     const if_delete_qualification = async () => {
       setDelete_qualification(false)
@@ -291,6 +314,7 @@ const Article = () => {
         }
       }
     }
+
     fetchdata() //拿取文章数据
     readingsADD() //阅读量+1
     if_delete_qualification() //查看是否具有删评权限
@@ -948,7 +972,7 @@ const Article = () => {
                         {singleart.category}&nbsp;&nbsp;&nbsp;
                         {singleart.post_date}
                         &nbsp;&nbsp;&nbsp;
-                        <EyeOutlined /> {Math.floor(singleart.readings / 2)}
+                        <EyeOutlined /> {Math.floor(singleart.readings)}
                         &nbsp;&nbsp;&nbsp;
                       </span>
                     </p>
@@ -969,7 +993,7 @@ const Article = () => {
                   <div className="comments_writebox">
                     <h3 className="write_title">评论 {commentsnum} 条</h3>
                     <div className="comments_write">
-                      <img src={avatar0} alt="" />
+                      <img src={commentAvatar} alt="" />
                       <div className="inputbox">
                         <div className="write">
                           <TextArea

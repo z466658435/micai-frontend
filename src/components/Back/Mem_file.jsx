@@ -112,11 +112,12 @@ function Mem_file() {
         const res = await axios.get(`/back/mem/${null}`)
         const modifiedMembers = res.data.map((item, index) => ({
           ...item,
+          gender: item.gender == '0' ? '男' : '女',
           key: `${index}`, // 使用索引创建唯一的key
         }))
         setMembers(modifiedMembers)
-        // console.log(11111)
-        // console.log(res.data)
+        console.log(11111)
+        console.log(res.data)
         setTotalnum(res.data.length)
       } catch (err) {
         console.log(err)
@@ -145,6 +146,7 @@ function Mem_file() {
           <Column title="学院" dataIndex="college" key="college" />
           <Column title="专业" dataIndex="major" key="major" />
           <Column title="QQ号码" dataIndex="QQnumber" key="QQnumber" />
+          <Column title="服役军种" dataIndex="services" key="services" />
           <Column title="年限" dataIndex="serviceTime" key="serviceTime" />
           <Column
             title="服役地点"

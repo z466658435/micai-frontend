@@ -358,7 +358,7 @@ function Article() {
           comments_num: `${
             item.comments ? JSON.parse(item.comments).comments_num : '0'
           }`,
-          readings: `${Math.floor(item.readings / 2)}`,
+          readings: `${Math.floor(item.readings )}`,
         }))
         data.sort((a, b) => new Date(b.date) - new Date(a.date))
         console.log(data)

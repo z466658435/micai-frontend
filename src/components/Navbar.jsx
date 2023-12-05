@@ -6,7 +6,7 @@ import axios from 'axios'
 import avatar0 from '../static/img/0.jpg'
 
 const Navbar = () => {
-  const { currentUser, logout } = useContext(AuthContext)
+  const { clientCount, currentUser, logout } = useContext(AuthContext)
   const [avatardata, setAvatardata] = useState({})
   // console.log(currentUser)
   // console.log(123)
