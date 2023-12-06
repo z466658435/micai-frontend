@@ -118,7 +118,7 @@ const Article = () => {
           content: `${item.content}`,
           likesnum: `${likesnum}`,
           commentsnum: `${commentsnum}`,
-          readings: `${Math.floor(item.readings )}`,
+          readings: `${Math.floor(item.readings)}`,
         }
       })
       // 上面的map函数内部的异步操作会导致整个 map 返回的是 Promise 数组，而不是包含实际数据的数组
@@ -195,7 +195,7 @@ const Article = () => {
           content: `${item.content}`,
           likesnum: `${likesnum}`,
           commentsnum: `${commentsnum}`,
-          readings: `${Math.floor(item.readings )}`,
+          readings: `${Math.floor(item.readings)}`,
         }
       })
       // 上面的map函数内部的异步操作会导致整个 map 返回的是 Promise 数组，而不是包含实际数据的数组
@@ -472,6 +472,7 @@ const Article = () => {
           </div>
         </div>
       </div>
+      <Footer ifHome={false} />
     </ConfigProvider>
   )
 }

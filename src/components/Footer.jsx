@@ -5,14 +5,16 @@ import qqLogo from '../static/img/footer/qqlogo.png'
 import githubLogo from '../static/img/footer/githublogo.png'
 import { Col, Divider, Row } from 'antd'
 import { WebSocketContext } from '../context/webSocketContext'
-const Footer = () => {
+const Footer = ({ifHome=true}) => {
   const { clientCount } = useContext(WebSocketContext)
   const [clientCounts, setClientCounts] = useState(0)
   useEffect(() => {
     setClientCounts(clientCount) //网站访问 客户端数量
   }, [])
   return (
-    <div className="footerbox">
+    <div className={`footerbox ${
+      ifHome ? '' : 'footerbox1'
+    }`}>
       <div className="footer_first"></div>
       <div className="footertitle">
         <div className="title01">

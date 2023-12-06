@@ -352,7 +352,7 @@ const Article = () => {
       const initialScrollLeft =
         (scrollContainer.scrollWidth - scrollContainer.clientWidth) / 2
       scrollContainer.scrollLeft = initialScrollLeft
-    }
+    } 
     tryToOperateOnDOM()
   }, [])
 

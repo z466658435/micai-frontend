@@ -6,6 +6,8 @@ import {
   MessageOutlined,
   EditFilled,
   DeleteFilled,
+  LeftSquareOutlined,
+  RightSquareOutlined,
 } from '@ant-design/icons'
 import moment from 'moment'
 import micaiLogo from '../static/img/micai.ico'
@@ -196,6 +198,8 @@ function Back() {
   const { currentUser } = useContext(AuthContext)
   const [selectedOption, setSelectedOption] = useState('profile')
   const [info, setInfo] = useState({})
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [ifBigScreen, setIfBigScreen] = useState(true)
 
   let content = null
 
@@ -267,8 +271,13 @@ function Back() {
     }
   }
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
   // const location = useLocation()
   useEffect(() => {
+    setIsMenuOpen(true)
+    setIfBigScreen(true)
     if (!currentUser) {
       navigate('/login')
     }
@@ -309,6 +318,23 @@ function Back() {
     }
     fetchData()
     access_confirm()
+
+    const handleResize = () => {
+      const screenWidth = window.innerWidth
+      if (screenWidth <= 900) {
+        setIsMenuOpen(false)
+        setIfBigScreen(false) // 如果屏幕宽度小于等于900px，自动关闭菜单
+      }else{
+        setIsMenuOpen(true)
+        setIfBigScreen(true)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
   }, [currentUser])
 
   const [beadmin, setBeadmin] = useState(0)
@@ -372,26 +398,74 @@ function Back() {
             <span>迷彩协会后台系统</span>
           </div>
         </div>
-        <div className="backbodybox">
-          <div className="navigation">
-            <div className="title" onClick={be_admin}>
-              <span>导航栏</span>
+        {ifBigScreen ? (
+          <div className="backbodybox">
+            <div className="navigation0">
+              <div>
+                <div className="title" onClick={be_admin}>
+                  <span>系统菜单栏</span>
+                </div>
+                <Menu
+                  mode="inline"
+                  openKeys={openKeys}
+                  onOpenChange={onOpenChange}
+                  onClick={onClickItem}
+                  style={{
+                    width: 'auto',
+                  }}
+                  items={items}
+                />
+              </div>
             </div>
-            <Menu
-              mode="inline"
-              openKeys={openKeys}
-              onOpenChange={onOpenChange}
-              onClick={onClickItem}
+            <div
+              className="backbody"
               style={{
-                width: 'auto',
-              }}
-              items={items}
-            />
+                width: `calc(100vw - 220px)`,
+              }}>
+              <div className="backcontent">{content}</div>
+            </div>
           </div>
-          <div className="backbody">
-            <div className="backcontent">{content}</div>
+        ) : (
+          <div className="backbodybox">
+            <div
+              className={`navigation ${
+                isMenuOpen ? 'menu-open' : 'menu-close'
+              }`}
+              >
+              {isMenuOpen ? (
+                <div>
+                  <div className="title" onClick={be_admin}>
+                    <span>导航栏</span>
+                  </div>
+                  <Menu
+                    mode="inline"
+                    openKeys={openKeys}
+                    onOpenChange={onOpenChange}
+                    onClick={onClickItem}
+                    style={{
+                      width: 'auto',
+                    }}
+                    items={items}
+                  />
+                  <div className="navigation_button0" onClick={toggleMenu}>
+                    <LeftSquareOutlined />
+                  </div>
+                </div>
+              ) : (
+                <div className="navigation_button" onClick={toggleMenu}>
+                  <RightSquareOutlined />
+                </div>
+              )}
+            </div>
+            <div
+              className="backbody"
+              style={{
+                width: `calc(100vw - ${isMenuOpen ? '0px' : '0px'})`,
+              }}>
+              <div className="backcontent">{content}</div>
+            </div>
           </div>
-        </div>
+        )}
         <Space
           direction="vertical"
           style={{

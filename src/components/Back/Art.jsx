@@ -326,6 +326,7 @@ function Article() {
           return dateB - dateA
         })
         setPhotos(tempPhotos)
+        console.log(tempPhotos)
         //头像
         var avatar
         await (async () => {
@@ -358,7 +359,7 @@ function Article() {
           comments_num: `${
             item.comments ? JSON.parse(item.comments).comments_num : '0'
           }`,
-          readings: `${Math.floor(item.readings )}`,
+          readings: `${Math.floor(item.readings)}`,
         }))
         data.sort((a, b) => new Date(b.date) - new Date(a.date))
         console.log(data)

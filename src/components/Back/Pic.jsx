@@ -210,7 +210,7 @@ function Pic() {
         <Upload {...props} action="" listType="picture">
           {limitnum < 8 ? (
             <Button icon={<UploadOutlined />} className="uploadbtn">
-              上传图片（ 严禁上传涉密图片，请先处理后再上传 ）
+              上传图片（ 严禁上传涉密图片，请先自行处理后再上传 ）
             </Button>
           ) : (
             <div></div>

@@ -205,7 +205,7 @@ const Picture = () => {
     const fetchall = async () => {
       try {
         const res = await axios.get(`/init_data/pic/${0}/${type}`)
-        const filter_data = res.data.filter((item) => item.img != '0')//只展示换过初始头像的用户
+        const filter_data = res.data.filter((item) => item.img != '0') //只展示换过初始头像的用户
         updateImageUrls(filter_data)
         setMembers(filter_data)
         // console.log(res.data)
@@ -383,6 +383,7 @@ const Picture = () => {
           </div>
         </div>
       </div>
+      <Footer ifHome={false}/>
     </ConfigProvider>
   )
 }
