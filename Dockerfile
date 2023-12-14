@@ -2,7 +2,7 @@ FROM node:18.12-slim
 
 WORKDIR /usr/src/app/frontend
 
-COPY . .
+COPY . . 
 
 COPY build/ /usr/src/app/frontend
 
