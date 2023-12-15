@@ -1,47 +1,27 @@
-import React, { useRef, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
-  AppstoreOutlined,
-  MailOutlined,
   LikeOutlined,
   MessageOutlined,
   EditFilled,
   DeleteFilled,
   EyeOutlined,
 } from '@ant-design/icons'
-import moment from 'moment'
-import micaiLogo from '../../static/img/micai.ico'
-import { UploadOutlined, SearchOutlined } from '@ant-design/icons'
 import { AuthContext } from '../../context/authContext'
 import {
-  Image,
   Button,
-  Input,
-  DatePicker,
   Space,
-  Table,
-  message,
-  Menu,
   Upload,
   Modal,
-  Alert,
   Radio,
-  ConfigProvider,
   Avatar,
   List,
-  Typography,
 } from 'antd'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import ImgCrop from 'antd-img-crop'
 import avatar0 from '../../static/img/0.jpg'
 import articleimg from '../../static/img/loading.gif'
-import Highlighter from 'react-highlight-words'
 import ReactQuill from 'react-quill' //富文本编辑器
 import 'react-quill/dist/quill.snow.css' //富文本编辑器
 
-const { Paragraph } = Typography
-const { Search } = Input
-const { Column } = Table
 
 function Article() {
   const { currentUser } = useContext(AuthContext)
@@ -129,7 +109,7 @@ function Article() {
       try {
         var article_id
         var type
-        if (editid == 0) {
+        if (editid === 0) {
           //发表新文章
           const res = await axios.post(`/back/article/single`, postdata)
           article_id = res.data
@@ -149,14 +129,14 @@ function Article() {
           // console.log(uploadblob.name)
           const formData = new FormData()
           formData.append('file', uploadblob)
-          if (type == 0) {
+          if (type === 0) {
             //发表
             const res1 = await axios.post(
               `/upload/article_photo/${article_id}/${currentUser.id}/${uploadblob.name}/${type}`,
               formData
             )
             console.log(res1.data)
-          } else if (type == 1) {
+          } else if (type === 1) {
             //编辑
             const res1 = await axios.post(
               `/upload/article_photo/${article_id}/${currentUser.id}/${editblobname}/${type}`,
@@ -190,10 +170,10 @@ function Article() {
       }
     }
 
-    if (modaltype == 1) {
+    if (modaltype === 1) {
       //删除文章
       deletearticle()
-    } else if (modaltype == 2) {
+    } else if (modaltype === 2) {
       //发表文章
       postarticle()
       setEditblobname(null)
@@ -301,7 +281,7 @@ function Article() {
     const fetchdata = async () => {
       const res = await axios.get(`/back/article/${currentUser.uuid}`)
       console.log(res.data)
-      if (res.data.length != 0) {
+      if (res.data.length !== 0) {
         const tempPhotos = []
         await Promise.all(
           res.data.map(async (item, index) => {
@@ -333,7 +313,7 @@ function Article() {
           console.log(res.data)
           const user_img = res.data[0].user_img
           const user_id = res.data[0].user_id
-          if (user_img == '0') {
+          if (user_img === '0') {
             avatar = avatar0
           } else {
             const avatar_image = await axios.get(

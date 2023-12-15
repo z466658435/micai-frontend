@@ -133,7 +133,7 @@ const Register = () => {
         return
       }
     }
-    if (isEmailValid == true) {
+    if (isEmailValid === true) {
       try {
         const res = await axios.get(`auth/email_send/${reginputs.username}`)
         console.log(res.data)
@@ -215,14 +215,14 @@ const Register = () => {
     console.log(222)
     //先验证 验证码和邀请码 都通过则可以创建
     e.preventDefault()
-    if (isEmailCodeValid == 1 && isEmailValid == 1) {
+    if (isEmailCodeValid === 1 && isEmailValid === 1) {
       try {
         console.log(reginputs)
         console.log(reginputs['username'])
         console.log(reginputs.username)
         const res = await axios.post('/auth/register', reginputs)
         console.log(res.data)
-        const res1 = await axios.post('/record', res.data) //日志
+        await axios.post('/record', res.data) //日志
         api.info({
           message: `新用户注册`,
           description: `账号注册成功!`,
@@ -252,13 +252,13 @@ const Register = () => {
     console.log(222)
     //先验证 验证码和邀请码 都通过则可以创建
     e.preventDefault()
-    if (isEmailCodeValid == 1 && isEmailValid == 1) {
-      if (modinputs.password && modinputs.password == modinputs.password1) {
+    if (isEmailCodeValid === 1 && isEmailValid === 1) {
+      if (modinputs.password && modinputs.password === modinputs.password1) {
         try {
           // console.log(modinputs)
           const res = await axios.post('/auth/modify', modinputs)
           console.log(res.data)
-          const res1 = await axios.post('/record', res.data) //日志
+          await axios.post('/record', res.data) //日志
           api.info({
             message: `修改&找回密码`,
             description: `密码已成功修改!`,
@@ -420,7 +420,7 @@ const Register = () => {
               <h1 className="title">注 册</h1>
               <div className="inputbigbox">
                 <div className="inputbox">
-                  {isEmailValid == 2 ? (
+                  {isEmailValid === 2 ? (
                     <CloseOutlined className="erricon" />
                   ) : (
                     <CloseOutlined className="erricon1" />
@@ -435,7 +435,7 @@ const Register = () => {
                   />
                 </div>
                 <div className="inputbox">
-                  {isEmailCodeValid == 2 ? (
+                  {isEmailCodeValid === 2 ? (
                     <CloseOutlined className="erricon" />
                   ) : (
                     <CloseOutlined className="erricon1" />
@@ -499,7 +499,7 @@ const Register = () => {
               <h1 className="title">修改&找回密码</h1>
               <div className="inputbigbox">
                 <div className="inputbox">
-                  {isEmailValid == 2 ? (
+                  {isEmailValid === 2 ? (
                     <CloseOutlined className="erricon" />
                   ) : (
                     <CloseOutlined className="erricon1" />
@@ -514,7 +514,7 @@ const Register = () => {
                   />
                 </div>
                 <div className="inputbox">
-                  {isEmailCodeValid == 2 ? (
+                  {isEmailCodeValid === 2 ? (
                     <CloseOutlined className="erricon" />
                   ) : (
                     <CloseOutlined className="erricon1" />

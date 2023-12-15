@@ -17,11 +17,11 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import { ConfigProvider, Steps } from 'antd'
-import micaiLogo from '../static/img/micai.ico'
-import njtechLogo from '../static/img/njtech.png'
 import * as echarts from 'echarts'
 import axios from 'axios'
 import Footer from '../components/Footer'
+// import micaiLogo from '../static/img/micai.ico'
+// import njtechLogo from '../static/img/njtech.png'
 
 const Home = () => {
   const [oridata, setOridata] = useState([])
@@ -305,11 +305,11 @@ const Home = () => {
               quibusdam quas, aut qui eum vitae eligendi magni nobis? Quia
               repellendus laborum laudantium.
             </p>
-              <a href="https://www.gfbzb.gov.cn/">
-            <div className="button">
+            <a href="https://www.gfbzb.gov.cn/">
+              <div className="button">
                 <span>全国征兵网</span>
-            </div>
-              </a>
+              </div>
+            </a>
           </div>
           <div className="video">
             <video
@@ -321,8 +321,7 @@ const Home = () => {
               muted></video>
           </div>
         </div>
-    <div className="home_first">
-    </div>
+        <div className="home_first"></div>
         <div className="second">
           <div className="stepbox">
             <div className="step">
@@ -379,10 +378,7 @@ const Home = () => {
             <div className="sectext">
               <h1>关于我们</h1>
               <h4>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime
-                enim beatae sunt cum repudiandae. Hic repellat minus fugiat
-                iusto? Sapiente aliquam deleniti iste dolorum itaque voluptatem
-                id consequatur unde atque.
+                迷彩协会是由大学里的退伍大学生自发组成的组织，旨在维护和传承军队文化，促进大学生的全面发展。
               </h4>
             </div>
           </div>

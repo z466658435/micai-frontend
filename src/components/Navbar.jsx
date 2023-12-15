@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import micaiLogo from '../static/img/micai.ico'
 import { AuthContext } from '../context/authContext'
 import axios from 'axios'
 import avatar0 from '../static/img/0.jpg'
+// import micaiLogo from '../static/img/micai.ico'
 
 const Navbar = () => {
-  const { clientCount, currentUser, logout } = useContext(AuthContext)
+  const { currentUser, logout } = useContext(AuthContext)
   const [avatardata, setAvatardata] = useState({})
   // console.log(currentUser)
   // console.log(123)
@@ -32,7 +32,7 @@ const Navbar = () => {
         try {
           const imageurl = currentUser.img
           const userid = currentUser.id
-          if (imageurl == '0') {
+          if (imageurl === '0') {
             setAvatardata(avatar0)
           } else {
             // console.log(22222)

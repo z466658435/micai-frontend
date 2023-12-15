@@ -7,11 +7,9 @@ import {
 } from '@ant-design/icons'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import {
-  Select,
   Avatar,
   List,
   Space,
-  Pagination,
   Input,
   notification,
   Button,
@@ -20,10 +18,8 @@ import {
 } from 'antd'
 import avatar0 from '../static/img/0.jpg'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/authContext'
 
-const { Search } = Input
 const { TextArea } = Input
 
 const Article = () => {
@@ -180,7 +176,7 @@ const Article = () => {
   const currentUrl = window.location.href
   const parts = currentUrl.split('/')
   const article_user_uuid = parts[parts.length - 2]
-  const article_id = parts[parts.length - 1]
+  const article_id = parseInt(parts[parts.length - 1])
   useEffect(() => {
     const fetchdata = async () => {
       const type = 0
@@ -201,13 +197,15 @@ const Article = () => {
       setTops(artdata.sort((a, b) => b.readings - a.readings).slice(0, 10))
       setOtherart(
         artdata
-          .filter((item) => item.author == article_user_uuid)
+          .filter((item) => item.author === article_user_uuid)
           .sort((a, b) => b.readings - a.readings)
           .slice(0, 5)
       )
 
       //单个文章数据
-      const single_article_data = res.data.find((item) => item.id == article_id)
+      const single_article_data = res.data.find(
+        (item) => item.id === article_id
+      )
       console.log(single_article_data)
       console.log(res.data)
       console.log(article_id)
@@ -230,7 +228,7 @@ const Article = () => {
       // console.log(user_id)
 
       //1、文章作者头像
-      if (user_img == '0') {
+      if (user_img === '0') {
         setAvatar(avatar0)
       } else {
         const avatar_image = await axios.get(
@@ -261,7 +259,7 @@ const Article = () => {
         try {
           const imageurl = currentUser.img
           const userid = currentUser.id
-          if (imageurl == '0') {
+          if (imageurl === '0') {
             setCommentAvatar(avatar0)
           } else {
             // console.log(22222)
@@ -294,7 +292,7 @@ const Article = () => {
     const if_delete_qualification = async () => {
       setDelete_qualification(false)
       if (currentUser) {
-        if (currentUser.uuid == article_user_uuid) {
+        if (currentUser.uuid === article_user_uuid) {
           //登录人与文章作者是同一人 则有删评权限
           setDelete_qualification(true)
         } else {
@@ -304,7 +302,7 @@ const Article = () => {
               `/back/adminconfirm/${currentUser.uuid}`
             )
             // console.log(res.data)
-            if (res.data != false) {
+            if (res.data !== false) {
               console.log('管理员' + res.data.name + '欢迎回来~')
               setDelete_qualification(true)
             }
@@ -352,7 +350,7 @@ const Article = () => {
       const initialScrollLeft =
         (scrollContainer.scrollWidth - scrollContainer.clientWidth) / 2
       scrollContainer.scrollLeft = initialScrollLeft
-    } 
+    }
     tryToOperateOnDOM()
   }, [])
 
@@ -380,7 +378,7 @@ const Article = () => {
         //评论人头像  await Promise.all不能只是await async函数返回的是promise对象 需要用Promise.all解析
         const data = await Promise.all(
           res.data.map(async (item) => {
-            if (item.user_img == '0') {
+            if (item.user_img === '0') {
               item.user_img = avatar0
             } else {
               const avatar_image = await axios.get(
@@ -402,7 +400,7 @@ const Article = () => {
         )
         // console.log(data)
         // console.log(dataa)
-        const data0 = dataa.filter((item) => item.father_comment_id == -1)
+        const data0 = dataa.filter((item) => item.father_comment_id === -1)
         const data1 = dataa.filter((item) => item.father_comment_id != -1)
         // console.log(data1)
         const data01 = data0.sort((a, b) => customSort(a, b))
@@ -413,9 +411,9 @@ const Article = () => {
           .map((item) => (item.comment_date = formatDate(item.comment_date))) //楼主评论日期新的排上面 子评论日期旧的排上面
         data11.map((item) => {
           item.comment_date = formatDate(item.comment_date)
-          if (item.reply_to_id != -1) {
+          if (item.reply_to_id !== -1) {
             const reply_to_obj = data11.find(
-              (item1) => item1.id == item.reply_to_id
+              (item1) => item1.id === item.reply_to_id
             )
             if (reply_to_obj) item.reply_to_name = reply_to_obj.user_name
           } else {
@@ -553,14 +551,14 @@ const Article = () => {
   //以下为输入框逻辑 reply0为楼主评论 reply10和11为楼主子评论 其中10为楼主索引 11为子评论索引
   //输入框同一时间只存在一个
   const comment_reply = (index0) => {
-    if (reply11 != -1 && reply10 != -1) {
+    if (reply11 !== -1 && reply10 !== -1) {
       //楼主子输入框打开 则先关闭子输入框
       setReply10(-1)
       setReply11(-1)
       setInput0('')
       setInput1('')
     }
-    if (reply0 == index0) {
+    if (reply0 === index0) {
       setReply0(-1) //为真即该index0索引的输入框在点击前已经打开 需要在此时关闭
       setInput0('')
       setInput1('')
@@ -571,12 +569,12 @@ const Article = () => {
     }
   }
   const comment_child_reply = (index0, index1) => {
-    if (reply0 != -1) {
+    if (reply0 !== -1) {
       setReply0(-1)
       setInput0('')
       setInput1('')
     } //楼主输入框打开 则先关闭楼主输入框
-    if (reply11 == index1 && reply10 == index0) {
+    if (reply11 === index1 && reply10 === index0) {
       //为真即该index1索引的输入框在点击前已经打开 需要在此时关闭
       setReply10(-1)
       setReply11(-1)
@@ -590,14 +588,14 @@ const Article = () => {
     }
   }
   useEffect(() => {
-    if (reply0 != -1) {
+    if (reply0 !== -1) {
       const all_reply_dom = document.querySelectorAll(`.inputbox1`)
       all_reply_dom.forEach((ele) => {
         ele.style.display = 'none'
       })
       const reply_dom = document.querySelector(`.comment${reply0} .inputbox1`)
       if (reply_dom) reply_dom.style.display = 'flex'
-    } else if (reply0 == -1) {
+    } else if (reply0 === -1) {
       const reply_dom1 = document.querySelectorAll(`.inputbox1`)
       if (reply_dom1) {
         reply_dom1.forEach((ele) => {
@@ -607,7 +605,7 @@ const Article = () => {
     }
   }, [reply0])
   useEffect(() => {
-    if (reply11 != -1 && reply10 != -1) {
+    if (reply11 !== -1 && reply10 !== -1) {
       const all_reply_dom = document.querySelectorAll(`.inputbox2`)
       all_reply_dom.forEach((ele) => {
         ele.style.display = 'none'
@@ -616,7 +614,7 @@ const Article = () => {
         `.comment${reply10} .comment_child${reply11} .inputbox2`
       )
       if (reply_dom) reply_dom.style.display = 'flex'
-    } else if (reply11 == -1 && reply10 == -1) {
+    } else if (reply11 === -1 && reply10 === -1) {
       const reply_dom2 = document.querySelectorAll(`.inputbox2`)
       if (reply_dom2) {
         reply_dom2.forEach((ele) => {
@@ -642,7 +640,7 @@ const Article = () => {
   const text_post0 = async () => {
     //楼主 评论按钮
     if (currentUser) {
-      if (input0 != '') {
+      if (input0 !== '') {
         const postdata = {
           user_uuid: currentUser.uuid,
           post_id: article_id,
@@ -707,7 +705,7 @@ const Article = () => {
   const text_post1 = async (father_id, reply_id) => {
     //楼主 子评论按钮
     if (currentUser) {
-      if (input1 != '') {
+      if (input1 !== '') {
         console.log(2222)
         const postdata = {
           user_uuid: currentUser.uuid,
@@ -785,7 +783,7 @@ const Article = () => {
     console.log(comment_child_data)
 
     const delete_child_num = comment_child_data.filter(
-      (item) => item.father_comment_id == index0_id
+      (item) => item.father_comment_id === index0_id
     ).length
     const res = await axios.delete(
       `/single_article/commentsDELETE/${index0_id}?post_id=${article_id}&comments_num=${
@@ -912,7 +910,7 @@ const Article = () => {
                   )}
                 />
                 <List
-                  header={<h3>热门文章 TOP10</h3>}
+                  header={<h3>热门文章 TOP5</h3>}
                   itemLayout="horizontal"
                   dataSource={tops}
                   className="menulist"
@@ -1031,9 +1029,9 @@ const Article = () => {
                               className={`landlord landlord${item.id}`}
                             />
                             <div className="reply0">
-                              {delete_qualification == true ||
+                              {delete_qualification === true ||
                               (currentUser &&
-                                currentUser.uuid == item.user_uuid) ? (
+                                currentUser.uuid === item.user_uuid) ? (
                                 <span
                                   className="deletebtn0"
                                   onClick={() => {
@@ -1099,9 +1097,9 @@ const Article = () => {
                                     description={`${item1.user_name} ${item1.user_major} ${item1.comment_date}`}
                                   />
                                   <div className="reply">
-                                    {delete_qualification == true ||
+                                    {delete_qualification === true ||
                                     (currentUser &&
-                                      currentUser.uuid == item1.user_uuid) ? (
+                                      currentUser.uuid === item1.user_uuid) ? (
                                       <span
                                         className="deletebtn"
                                         onClick={() => {

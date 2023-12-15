@@ -80,7 +80,7 @@ const Picture = () => {
   // 更新图像URL的函数
   const updateImageUrls = (data) => {
     const urls = data.map(async (item) => {
-      if (item.img == '0') {
+      if (item.img === '0') {
         return avatar0
       } else {
         const avatar_image = await axios.get(
@@ -154,7 +154,7 @@ const Picture = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page)
     const currentPage1Element = document.querySelector('.ant-pagination-item-1')
-    if (page != 1 && currentPage1Element) {
+    if (page !== 1 && currentPage1Element) {
       currentPage1Element.classList.remove('ant-pagination-item-active')
     }
     updateURL(page, searchValue, chooseCollege)
@@ -182,9 +182,9 @@ const Picture = () => {
   const onClickItem = async (item) => {
     setSelectedKeys(item.keyPath)
     const foundItems = items.find(
-      (item0) => item0.key == item.keyPath[1]
+      (item0) => item0.key === item.keyPath[1]
     ).children
-    const needItem = foundItems.find((item0) => item0.key == item.keyPath[0])
+    const needItem = foundItems.find((item0) => item0.key === item.keyPath[0])
     const college = needItem.label
     setChooseCollege(college)
     const type = 1
@@ -205,7 +205,7 @@ const Picture = () => {
     const fetchall = async () => {
       try {
         const res = await axios.get(`/init_data/pic/${0}/${type}`)
-        const filter_data = res.data.filter((item) => item.img != '0') //只展示换过初始头像的用户
+        const filter_data = res.data.filter((item) => item.img !== '0') //只展示换过初始头像的用户
         updateImageUrls(filter_data)
         setMembers(filter_data)
         // console.log(res.data)
@@ -213,7 +213,7 @@ const Picture = () => {
         const currentPage1Element = document.querySelector(
           '.ant-pagination-item-1'
         )
-        if (currentPage == 1 && currentPage1Element) {
+        if (currentPage === 1 && currentPage1Element) {
           currentPage1Element.classList.add('ant-pagination-item-active')
         }
         // console.log(66666)
@@ -383,7 +383,7 @@ const Picture = () => {
           </div>
         </div>
       </div>
-      <Footer ifHome={false}/>
+      <Footer ifHome={false} />
     </ConfigProvider>
   )
 }

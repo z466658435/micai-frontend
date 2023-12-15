@@ -1,45 +1,24 @@
-import React, { useRef, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
-  AppstoreOutlined,
-  MailOutlined,
   LikeOutlined,
   MessageOutlined,
-  EditFilled,
   DeleteFilled,
   EyeOutlined,
 } from '@ant-design/icons'
-import moment from 'moment'
-import micaiLogo from '../../static/img/micai.ico'
-import { UploadOutlined, SearchOutlined } from '@ant-design/icons'
 import { AuthContext } from '../../context/authContext'
 import {
-  Image,
-  Button,
   Input,
-  DatePicker,
   Space,
   Table,
-  message,
-  Menu,
-  Upload,
   Modal,
-  Alert,
-  Radio,
-  ConfigProvider,
   Avatar,
   List,
   Typography,
 } from 'antd'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import ImgCrop from 'antd-img-crop'
 import avatar0 from '../../static/img/0.jpg'
 import articleimg from '../../static/img/loading.gif'
-import Highlighter from 'react-highlight-words'
-import ReactQuill from 'react-quill' //富文本编辑器
-import 'react-quill/dist/quill.snow.css' //富文本编辑器
 
-const { Paragraph } = Typography
 const { Search } = Input
 const { Column } = Table
 
@@ -108,11 +87,11 @@ function Mem_art() {
     showModal()
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     onSearch(search_value)
     setRefresh(false)
-  },[refresh])
-  
+  }, [refresh])
+
   const onSearch = async (value) => {
     setSearch_value(value)
     try {
@@ -132,7 +111,7 @@ function Mem_art() {
       console.log(res_singlemem.data)
       const fetchdata = async () => {
         const res = await axios.get(`/back/article/${user_uuid}`)
-        if (res.data.length != 0) {
+        if (res.data.length !== 0) {
           const tempPhotos = []
           await Promise.all(
             res.data.map(async (item, index) => {
@@ -164,7 +143,7 @@ function Mem_art() {
             const user_id = res.data[0].user_id
             console.log(user_img)
             console.log(user_id)
-            if (user_img == '0') {
+            if (user_img === '0') {
               avatar = avatar0
             } else {
               const avatar_image = await axios.get(
@@ -190,12 +169,12 @@ function Mem_art() {
             comments_num: `${
               item.comments ? JSON.parse(item.comments).comments_num : '0'
             }`,
-            readings: `${Math.floor(item.readings )}`,
+            readings: `${Math.floor(item.readings)}`,
           }))
           data.sort((a, b) => new Date(b.date) - new Date(a.date))
           setArticledata(data)
           console.log(data)
-        }else {
+        } else {
           console.log(1111111)
           setArticledata([])
         }

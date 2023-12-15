@@ -1,24 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  LikeOutlined,
-  MessageOutlined,
-  EditFilled,
-  DeleteFilled,
-} from '@ant-design/icons'
 import moment from 'moment'
-import micaiLogo from '../../static/img/micai.ico'
-import { UploadOutlined, SearchOutlined } from '@ant-design/icons'
+import { UploadOutlined } from '@ant-design/icons'
 import { AuthContext } from '../../context/authContext'
-import {
-  Image,
-  Button,
-  Input,
-  DatePicker,
-  Upload,
-  Modal,
-} from 'antd'
+import { Image, Button, Input, DatePicker, Upload, Modal } from 'antd'
 import axios from 'axios'
 import ImgCrop from 'antd-img-crop'
 import avatar0 from '../../static/img/0.jpg'
@@ -177,8 +161,9 @@ function Profile() {
       try {
         const res = await axios.get(`/back/${currentUser.id}`)
         setProinfo(res.data)
+        console.log(res.data)
         const imageurl = res.data.img
-        if (imageurl == '0') {
+        if (imageurl === '0') {
           setAvatardata(avatar0)
         } else {
           const avatar_image = await axios.get(
@@ -218,7 +203,7 @@ function Profile() {
                   className="igender0"
                   name="gender"
                   value="男"
-                  defaultChecked={proinfo.gender == 0}
+                  defaultChecked={proinfo.gender === "0"}
                   key={proinfo.gender}
                 />
                 <span>男</span>
@@ -229,7 +214,7 @@ function Profile() {
                   className="igender1"
                   name="gender"
                   value="女"
-                  defaultChecked={proinfo.gender == 1}
+                  defaultChecked={proinfo.gender === "1"}
                   key={proinfo.gender}
                 />
                 <span>女</span>

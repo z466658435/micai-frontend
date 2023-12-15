@@ -62,7 +62,7 @@ const Article = () => {
 
   const fetchdata = async (search_value, type) => {
     var res
-    if (type == 0) {
+    if (type === 0) {
       //初始化 文章全拿
       res = await axios.get(`/init_data/art/${0}/${0}`)
       console.log(type)
@@ -73,7 +73,7 @@ const Article = () => {
         var avatarimg
         var coverimg
         //文章所属作者头像
-        if (item.user_img == '0') {
+        if (item.user_img === '0') {
           avatarimg = avatar0
         } else {
           const avatar_image = await axios.get(
@@ -99,7 +99,7 @@ const Article = () => {
         const likesnum = item.likes ? JSON.parse(item.likes).length : 0
         // console.log(likesnum)
         const commentsnum =
-          item.comments != null ? JSON.parse(item.comments).comments_num : 0
+          item.comments !== null ? JSON.parse(item.comments).comments_num : 0
         // console.log(commentsnum)
 
         return {
@@ -135,11 +135,11 @@ const Article = () => {
       const currentPage1Element = document.querySelector(
         '.ant-pagination-item-1'
       )
-      if (currentPage == 1 && currentPage1Element) {
+      if (currentPage === 1 && currentPage1Element) {
         console.log(333333)
         currentPage1Element.classList.add('ant-pagination-item-active')
       }
-    } else if (type == 1) {
+    } else if (type === 1) {
       //搜索框 文章只拿查询作者姓名和文章标题包含搜索词的文章
       res = await axios.get(`/init_data/art/${search_value}/${1}`)
       console.log(type)
@@ -150,7 +150,7 @@ const Article = () => {
         var avatarimg
         var coverimg
         //文章所属作者头像
-        if (item.user_img == '0') {
+        if (item.user_img === '0') {
           avatarimg = avatar0
         } else {
           const avatar_image = await axios.get(
@@ -176,7 +176,7 @@ const Article = () => {
         const likesnum = item.likes ? JSON.parse(item.likes).length : 0
         console.log(likesnum)
         const commentsnum =
-          item.comments != null ? JSON.parse(item.comments).comments_num : 0
+          item.comments !== null ? JSON.parse(item.comments).comments_num : 0
         console.log(commentsnum)
 
         return {
@@ -210,7 +210,7 @@ const Article = () => {
       const currentPage1Element = document.querySelector(
         '.ant-pagination-item-1'
       )
-      if (currentPage == 1 && currentPage1Element) {
+      if (currentPage === 1 && currentPage1Element) {
         console.log(333333)
         currentPage1Element.classList.add('ant-pagination-item-active')
       }
@@ -233,7 +233,7 @@ const Article = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page)
     const currentPage1Element = document.querySelector('.ant-pagination-item-1')
-    if (page != 1 && currentPage1Element) {
+    if (page !== 1 && currentPage1Element) {
       currentPage1Element.classList.remove('ant-pagination-item-active')
     }
   }
@@ -278,7 +278,7 @@ const Article = () => {
       const currentPage1Element = document.querySelector(
         '.ant-pagination-item-1'
       )
-      if (currentPage == 1 && currentPage1Element) {
+      if (currentPage === 1 && currentPage1Element) {
         console.log(333333)
         currentPage1Element.classList.add('ant-pagination-item-active')
       }
@@ -301,22 +301,22 @@ const Article = () => {
       switch (e.target.value) {
         case 1:
           new_articles = ori_articles.filter(
-            (item) => item.category == '协会动态'
+            (item) => item.category === '协会动态'
           )
           break
         case 2:
           new_articles = ori_articles.filter(
-            (item) => item.category == '学习研习'
+            (item) => item.category === '学习研习'
           )
           break
         case 3:
           new_articles = ori_articles.filter(
-            (item) => item.category == '工作相关'
+            (item) => item.category === '工作相关'
           )
           break
         case 4:
           new_articles = ori_articles.filter(
-            (item) => item.category == '谈天说地'
+            (item) => item.category === '谈天说地'
           )
           console.log(new_articles)
           break
@@ -365,7 +365,7 @@ const Article = () => {
                 </Radio.Group>
               </div>
               <List
-                header={<h3>热门文章 TOP10</h3>}
+                header={<h3>热门文章 TOP5</h3>}
                 itemLayout="horizontal"
                 dataSource={tops}
                 className="menulist"

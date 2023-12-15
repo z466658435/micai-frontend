@@ -1,20 +1,19 @@
 import { React, useContext, useEffect, useState } from 'react'
-// import Logo from"../img/logo.png"
 import micaiLogo from '../static/img/micai.ico'
 import qqLogo from '../static/img/footer/qqlogo.png'
 import githubLogo from '../static/img/footer/githublogo.png'
-import { Col, Divider, Row } from 'antd'
+import { Col,  Row } from 'antd'
 import { WebSocketContext } from '../context/webSocketContext'
-const Footer = ({ifHome=true}) => {
+// import Logo from"../img/logo.png"
+
+const Footer = ({ ifHome = true }) => {
   const { clientCount } = useContext(WebSocketContext)
   const [clientCounts, setClientCounts] = useState(0)
   useEffect(() => {
     setClientCounts(clientCount) //网站访问 客户端数量
   }, [])
   return (
-    <div className={`footerbox ${
-      ifHome ? '' : 'footerbox1'
-    }`}>
+    <div className={`footerbox ${ifHome ? '' : 'footerbox1'}`}>
       <div className="footer_first"></div>
       <div className="footertitle">
         <div className="title01">
@@ -29,8 +28,8 @@ const Footer = ({ifHome=true}) => {
       <hr className="footerhr" />
       <div className="footersec">
         <Row gutter={[16, 24]}>
-          <Col className="gutter-row" span={6}>
-            <div className="footeritem Frameworks">
+          <Col className="gutter-row Frameworks" span={6}>
+            <div className="footeritem ">
               <h2>Frameworks</h2>
               <hr />
               <a href="https://react.dev/">React.js</a>
@@ -40,8 +39,8 @@ const Footer = ({ifHome=true}) => {
               <a href="https://ant.design/index-cn">Ant Design</a>
             </div>
           </Col>
-          <Col className="gutter-row" span={6}>
-            <div className="footeritem Websites">
+          <Col className="gutter-row Websites" span={6}>
+            <div className="footeritem ">
               <h2>Websites</h2>
               <hr />
               <a href="https://www.gfbzb.gov.cn/">全国征兵网</a>
@@ -49,8 +48,8 @@ const Footer = ({ifHome=true}) => {
               <a href="https://wzb.njtech.edu.cn/">南京工业大学国防教育网</a>
             </div>
           </Col>
-          <Col className="gutter-row" span={6}>
-            <div className="footeritem Friendlylink">
+          <Col className="gutter-row Friendlylink" span={6}>
+            <div className="footeritem ">
               <h2>Friendly link</h2>
               <hr />
               <a href="https://acm.online.njtech.edu.cn/">Njtech OJ</a>
@@ -58,7 +57,7 @@ const Footer = ({ifHome=true}) => {
               <a href="https://www.vistalab.top">Njtech Vistalab</a>
             </div>
           </Col>
-          <Col className="gutter-row" span={6}>
+          <Col className="gutter-row Developing" span={6}>
             <h2>Developing</h2>
             <hr />
           </Col>
@@ -66,9 +65,9 @@ const Footer = ({ifHome=true}) => {
       </div>
       <div className="legalbox">
         <div className="legal">
-          <p>CopyrightXXXXXX</p>
-          <p className='clientcounts'>本站目前访问人数：{clientCounts} 人</p>
-          </div>
+          <p className="legaltext">CopyrightXXXXXXXXXXXXX</p>
+          <p className="clientcounts">本站目前访问人数：{clientCounts} 人</p>
+        </div>
       </div>
       {/* <span>
         Made with love and <b>React.js</b>

@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react"
 import axios from 'axios'
-import CheckableTag from "antd/es/tag/CheckableTag"
 
 export const AuthContext = createContext()
 
@@ -66,7 +65,7 @@ export const AuthContexProvider = ({ children }) => {
       // console.log(345345435)
       // console.log(res.data)
       // console.log(345345435)
-      if (res.data == 0) {
+      if (res.data === 0) {
         localStorage.clear()
         setCurrentUser(null)
       }

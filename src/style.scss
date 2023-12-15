@@ -25,7 +25,7 @@
   width: 100%;
   display: flex;
   .container {
-    width: 100%;
+    width: 100vw;
     overflow-x: auto;
     .link {
       text-decoration: none;
@@ -66,7 +66,7 @@
         display: flex;
         align-items: center;
         width: 100vw;
-        height: 100%;
+        height: calc(100% - 80px);
         $paginationColor: rgb(56, 56, 56);
         // .navigation {
         //   transition: max-height 0.3s ease;
@@ -149,6 +149,7 @@
             background-color: #749946;
             border-radius: 5px;
             color: #fff;
+            opacity: 0.5;
           }
         }
         .navigation0 {
@@ -221,19 +222,26 @@
           .backcontent {
             width: 100%;
             height: 100%;
+            overflow-y: auto;
             .profile {
               display: flex;
               text-align: center;
               justify-content: center;
-              height: 700px;
-              overflow-y: auto;
+              width: 90%;
+              height: auto;
+              margin-left: 5%;
               overflow-x: auto;
+              @media (max-width: 650px) {
+                flex-direction: column;
+              }
               .basicbox {
-                display: flex;
-                text-align: center;
-                justify-content: center;
-                flex: 3;
+                width: 350px;
+                order: 2;
+                @media (max-width: 650px) {
+                  margin: 0 auto 50px;
+                }
                 .basic {
+                  min-width: 280px;
                   margin-top: 40px;
                   span {
                     font-size: 18px;
@@ -242,7 +250,6 @@
                   }
                   .flex {
                     display: flex;
-                    width: 350px;
                     height: 40px;
                     margin-top: 10px;
                     .datepicker {
@@ -304,10 +311,17 @@
                 }
               }
               .avatarbox0 {
-                flex: 2;
+                width: auto;
                 display: flex;
+                order: 1;
+                @media (max-width: 650px) {
+                  margin: 0 auto;
+                }
                 .avatarbox {
                   margin-top: 60px;
+                  @media (max-width: 650px) {
+                    margin-top: 30px;
+                  }
                   .avatar {
                     width: 200px;
                     height: 200px;
@@ -970,10 +984,10 @@
       justify-content: center;
       margin-top: 20px;
       position: fixed;
-      width: 100%;
+      width: 98%;
       height: 60px;
       z-index: 2;
-      padding: 0px 10px;
+      padding: 0px 1%;
 
       .logo {
         position: absolute;
@@ -997,9 +1011,16 @@
         @media (min-width: 900px) {
           margin-right: 100px;
         }
-        @media (max-width: 900px) {
+        @media (max-width: 1000px) {
           margin-right: 5%;
-          margin-top: 25%;
+        }
+        @media (max-width: 850px) {
+          position: fixed;
+          margin-right: 5%;
+          bottom: 3%;
+          width: 60px;
+          height: 60px;
+          overflow: hidden;
         }
         .userimg {
           width: 100%;
@@ -1017,6 +1038,9 @@
         overflow: hidden;
         box-shadow: 0 5px 20px rgba($color: #000000, $alpha: 0.5);
         background-color: rgba($color: #2a2b2b, $alpha: 0.5);
+        @media (max-width: 650px) {
+          width: 100%;
+        }
         .link {
           padding: 0 10px;
           display: flex;
@@ -1028,13 +1052,17 @@
           font-weight: 400;
           z-index: 10;
           width: 100px;
-          span {
+          @media (max-width: 650px) {
+            width: 20%;
           }
         }
         .animation {
           position: absolute;
           height: 100%;
           width: 120px;
+          @media (max-width: 650px) {
+            width: calc(20%);
+          }
           background-color: rgba($color: #749946, $alpha: 0.8);
           z-index: 9;
           left: 0;
@@ -1042,29 +1070,29 @@
           transition: 0.5s;
         }
         .animation.hovered {
-          left: 120px;
+          left: calc(20%);
         }
         .animation.hovered1 {
-          left: 240px;
+          left: calc(40%);
         }
         .animation.singlehover {
-          left: -120px;
+          left: calc(-20%);
           transition: 0s;
         }
         .link:nth-child(1):hover ~ .animation {
           left: 0px;
         }
         .link:nth-child(2):hover ~ .animation {
-          left: 120px;
+          left: calc(20%);
         }
         .link:nth-child(3):hover ~ .animation {
-          left: 240px;
+          left: calc(40%);
         }
         .link:nth-child(4):hover ~ .animation {
-          left: 360px;
+          left: calc(60%);
         }
         .link:nth-child(5):hover ~ .animation {
-          left: 480px;
+          left: calc(80%);
         }
       }
       h6 {
@@ -1125,7 +1153,11 @@
           }
         }
         .title02 {
+          @media (max-width: 650px) {
+            display: none;
+          }
           margin-right: 10%;
+          display: inline-flex;
           img {
             margin-right: 10px;
             border-radius: 50%;
@@ -1161,6 +1193,16 @@
             text-decoration: underline;
           }
         }
+        @media (max-width: 650px) {
+          .Developing,
+          .Frameworks {
+            display: none;
+          }
+          .Friendlylink,
+          .Websites {
+            max-width: 50%;
+          }
+        }
       }
       .legalbox {
         margin-top: 60px;
@@ -1173,6 +1215,18 @@
           margin: 0 10%;
           font-size: 18px;
           color: #fff;
+        }
+        @media (max-width: 650px) {
+          .legal {
+            height: 120px;
+            flex-direction: column;
+          }
+          .legaltext {
+            width: 100%;
+          }
+          .clientcounts {
+            width: 100%;
+          }
         }
         .clientcounts {
           align-items: center;
@@ -1199,21 +1253,26 @@
         justify-content: center;
         overflow: hidden;
         background-color: rgba($color: #000000, $alpha: 0.1);
-        .micaiLogo {
-          position: absolute;
-          left: 8%;
-          top: 5%;
-          img {
-            width: 80px;
-          }
-        }
+        // .micaiLogo {
+        //   position: absolute;
+        //   left: 8%;
+        //   top: 5%;
+        //   img {
+        //     width: 80px;
+        //   }
+        // }
         .text {
           top: 35%;
           left: 8%;
           position: absolute;
           color: white;
-          width: 800px;
+          max-width: 800px;
           height: 400px;
+          @media (max-width: 650px) {
+            top: 25%;
+            width: 84%;
+            text-align: center;
+          }
           .p1 {
             font-size: 3em;
             font-weight: 600;
@@ -1224,16 +1283,15 @@
             margin: 0;
             font-size: 3em;
             font-weight: 600;
-            width: 400px;
             color: #749946;
             display: inline-block;
             position: relative;
-            img {
-              position: absolute;
-              align-items: center;
-              margin-left: 20px;
-              width: 70px;
-            }
+            // img {
+            //   position: absolute;
+            //   align-items: center;
+            //   margin-left: 20px;
+            //   width: 70px;
+            // }
           }
 
           .p2 {
@@ -1253,6 +1311,9 @@
           width: 230px;
           display: block;
           text-decoration: none;
+          @media (max-width: 650px) {
+            margin: 0 auto;
+          }
           span {
             position: relative;
             z-index: 1;
@@ -1348,6 +1409,9 @@
           height: 200px;
           background: linear-gradient(to bottom, rgb(94, 122, 59));
           .step {
+            @media (max-width: 650px) {
+              display: none;
+            }
             width: 80%;
             .ant-steps-item-description {
               color: rgb(247, 247, 247);
@@ -1368,16 +1432,23 @@
           text-align: center;
           justify-content: center;
           margin-top: 50px;
+          @media (max-width: 650px) {
+            margin-top: -50px;
+          }
           // border:1px solid red;
 
           .sectext {
             color: #dbdbdb;
-            width: 40%;
+            width: 80%;
+            min-width: 300px;
             font-size: 1.4rem;
           }
         }
 
         .carousel {
+          @media (max-width: 650px) {
+            display: none;
+          }
           display: flex;
           text-align: center;
           justify-content: center;
@@ -1565,7 +1636,7 @@
             }
             .postimg {
               img {
-                @media (min-width: 768px) {
+                @media (min-width: 770px) {
                   right: 0%;
                 }
               }
@@ -1637,7 +1708,7 @@
       width: 100vw;
       overflow: hidden;
       background-image: url('../src/static/background/bg2.jpg');
-      @media (max-height: 600px) {
+      @media (max-height: 650px) {
         overflow-y: scroll;
         background-size: 100% 600px;
       }
@@ -1661,6 +1732,9 @@
           margin: 0 auto;
         }
       }
+      @media (max-width: 650px) {
+        justify-content: start;
+      }
       .part1 {
         // border: 1px solid red;
         color: white;
@@ -1681,7 +1755,17 @@
             margin: 0 auto;
           }
         }
-
+        @media (max-width: 650px) {
+          margin-top: 20px;
+          .p1,
+          .p11,
+          .p2 {
+            display: none;
+          }
+          .button_a {
+            margin-top: 20px;
+          }
+        }
         @media (max-width: 1000px) {
           .button {
             margin-bottom: 40px;
@@ -1780,7 +1864,7 @@
           width: auto;
           margin: 0 auto;
         }
-        @media (max-width: 400px) {
+        @media (max-width: 650px) {
           width: 100%;
           margin: 0 auto;
         }
@@ -1789,6 +1873,9 @@
         .loginbox {
           text-align: center;
           position: relative;
+          @media (max-width: 650px) {
+            margin-top: 0px;
+          }
           .switch_to_register {
             position: absolute;
             width: 240px;
@@ -1796,7 +1883,7 @@
             margin-top: 50px;
             padding: 0 20px;
             transform: translate(-50%, -50%);
-            background-color: rgba(81, 102, 62, 0);
+            background-color: rgba(255, 255, 255, 0);
             font-weight: 700;
             font-size: 24px;
             letter-spacing: 1.5px;
@@ -1807,7 +1894,7 @@
           }
           .switch_to_register:hover {
             transition: 1s ease;
-            background-color: rgba(34, 117, 138, 0.5);
+            background-color: rgba(255, 255, 255, 0.3);
             // box-shadow: 0 0 5px #f9f9f9, 0 0 30px #f9f9f9;
           }
           .login {
@@ -1884,6 +1971,9 @@
         .registerbox {
           text-align: center;
           position: relative;
+          @media (max-width: 650px) {
+            margin-top: 0px;
+          }
           .switch_to_login {
             position: absolute;
             width: 240px;
@@ -1891,7 +1981,7 @@
             margin-top: 50px;
             padding: 0 20px;
             transform: translate(-50%, -50%);
-            background-color: rgba(81, 102, 62, 0);
+            background-color: rgba(255, 255, 255, 0);
             font-weight: 700;
             font-size: 24px;
             letter-spacing: 1.5px;
@@ -1902,13 +1992,16 @@
           }
           .switch_to_login:hover {
             transition: 1s ease;
-            background-color: rgba(34, 117, 138, 0.5);
+            background-color: rgba(255, 255, 255, 0.3);
             // box-shadow: 0 0 5px #f9f9f9, 0 0 30px #f9f9f9;
           }
           .register {
             padding: 40px 30px 20px;
+            @media (max-width: 650px) {
+              padding: 20px 0px 0px;
+            }
             border-radius: 20px;
-            background-color: rgba(255, 255, 255, 0.4);
+            background-color: rgba(255, 255, 255, 0.6);
             .backicon {
               position: absolute;
               font-size: 32px;

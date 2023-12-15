@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import carousel5 from '../static/img/carousel05.png'
 import {
-  SmileOutlined,
   BookOutlined,
   MessageOutlined,
   LikeOutlined,
@@ -38,7 +36,7 @@ const Single = () => {
         const dateObject = new Date(res.data.date)
         res.data.date = new Date().getFullYear() - dateObject.getFullYear()
         setProinfo(res.data)
-        if (res.data.img == '0') {
+        if (res.data.img === '0') {
           setAvatardata(avatar0)
         } else {
           const avatar_image = await axios.get(
@@ -105,15 +103,15 @@ const Single = () => {
 
     //拿取文章初始化数据
     const fetchdata1 = async () => {
-      const res = await axios.get(`/back/article/${currentUser.uuid}`)
+      const res = await axios.get(`/back/article/${params.uuid}`)
       console.log(res.data)
-      if (res.data.length != 0) {
+      if (res.data.length !== 0) {
         const tempPhotos = []
         await Promise.all(
           res.data.map(async (item, index) => {
             if (item.img) {
               const photo_image = await axios.get(
-                `/picture/article_photo/${item.img}?userid=${currentUser.id}`,
+                `/picture/article_photo/${item.img}?userid=${item.id}`,
                 {
                   responseType: 'blob', // 设置响应类型为 Blob
                 }
@@ -139,7 +137,7 @@ const Single = () => {
           console.log(res.data)
           const user_img = res.data[0].user_img
           const user_id = res.data[0].user_id
-          if (user_img == '0') {
+          if (user_img === '0') {
             avatar = avatar0
           } else {
             const avatar_image = await axios.get(
@@ -202,7 +200,7 @@ const Single = () => {
             <div className="box12">
               <div className="box121">
                 <p>
-                  性别：<span>{proinfo.gender == '1' ? '女' : '男'}</span>
+                  性别：<span>{proinfo.gender === '1' ? '女' : '男'}</span>
                 </p>
                 <p>
                   籍贯：<span>{proinfo.nativePlace}</span>

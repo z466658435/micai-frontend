@@ -1,42 +1,20 @@
-import React, { useRef, useContext, useEffect, useState } from 'react'
+import React, {  useContext, useEffect, useState } from 'react'
 import {
   AppstoreOutlined,
   MailOutlined,
-  LikeOutlined,
-  MessageOutlined,
-  EditFilled,
-  DeleteFilled,
   LeftSquareOutlined,
   RightSquareOutlined,
 } from '@ant-design/icons'
-import moment from 'moment'
 import micaiLogo from '../static/img/micai.ico'
-import { UploadOutlined, SearchOutlined } from '@ant-design/icons'
 import { AuthContext } from '../context/authContext'
 import {
-  Image,
-  Button,
-  Input,
-  DatePicker,
   Space,
-  Table,
-  message,
   Menu,
-  Upload,
-  Modal,
   Alert,
-  Radio,
   ConfigProvider,
-  Avatar,
-  List,
-  Typography,
 } from 'antd'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import ImgCrop from 'antd-img-crop'
-import avatar0 from '../static/img/0.jpg'
-import Highlighter from 'react-highlight-words'
-import ReactQuill from 'react-quill' //富文本编辑器
 import 'react-quill/dist/quill.snow.css' //富文本编辑器
 
 import Access_error from '../components/Back/Access_error'
@@ -49,10 +27,6 @@ import Mem_file from '../components/Back/Mem_file'
 import Profile from '../components/Back/Profile'
 import Pic from '../components/Back/Pic'
 import Statistic_record from '../components/Back/Statistic_record'
-
-const { Paragraph } = Typography
-const { Search } = Input
-const { Column } = Table
 
 var admin_access = false
 // const data = [
@@ -212,22 +186,22 @@ function Back() {
   } else if (selectedOption === 'article') {
     content = <Art />
   } else if (selectedOption === 'mem_file') {
-    if (admin_access == true) content = <Mem_file />
+    if (admin_access === true) content = <Mem_file />
     else content = <Access_error />
   } else if (selectedOption === 'mem_pic') {
-    if (admin_access == true) content = <Mem_pic />
+    if (admin_access === true) content = <Mem_pic />
     else content = <Access_error />
   } else if (selectedOption === 'mem_art') {
-    if (admin_access == true) content = <Mem_art />
+    if (admin_access === true) content = <Mem_art />
     else content = <Access_error />
   } else if (selectedOption === 'record') {
-    if (admin_access == true) content = <Daily_record />
+    if (admin_access === true) content = <Daily_record />
     else content = <Access_error />
   } else if (selectedOption === 'statistics') {
-    if (admin_access == true) content = <Statistic_record />
+    if (admin_access === true) content = <Statistic_record />
     else content = <Access_error />
   } else if (selectedOption === 'invitecode') {
-    if (admin_access == true) content = <Invitecode />
+    if (admin_access === true) content = <Invitecode />
     else content = <Access_error />
   }
 
@@ -274,8 +248,14 @@ function Back() {
   }
   // const location = useLocation()
   useEffect(() => {
-    setIsMenuOpen(true)
-    setIfBigScreen(true)
+    const screenWidth = window.innerWidth
+    if (screenWidth <= 900) {
+      setIsMenuOpen(false)
+      setIfBigScreen(false) // 如果屏幕宽度小于等于900px，自动关闭菜单
+    } else {
+      setIsMenuOpen(true)
+      setIfBigScreen(true)
+    }
     if (!currentUser) {
       navigate('/login')
     }
@@ -283,7 +263,7 @@ function Back() {
       try {
         const res = await axios.get(`/back/adminconfirm/${currentUser.uuid}`)
         console.log(res.data)
-        if (res.data != false) {
+        if (res.data !== false) {
           console.log('管理员' + res.data.name + '欢迎回来~')
           admin_access = true
         }
@@ -294,11 +274,10 @@ function Back() {
     access_confirm()
 
     const handleResize = () => {
-      const screenWidth = window.innerWidth
       if (screenWidth <= 900) {
         setIsMenuOpen(false)
         setIfBigScreen(false) // 如果屏幕宽度小于等于900px，自动关闭菜单
-      }else{
+      } else {
         setIsMenuOpen(true)
         setIfBigScreen(true)
       }
@@ -347,7 +326,7 @@ function Back() {
         console.log(err)
       }
     }
-    if (beadmin == 10 && admin_access == false) {
+    if (beadmin === 10 && admin_access === false) {
       up_to_admin()
       console.log(11111111)
     }
@@ -404,8 +383,7 @@ function Back() {
             <div
               className={`navigation ${
                 isMenuOpen ? 'menu-open' : 'menu-close'
-              }`}
-              >
+              }`}>
               {isMenuOpen ? (
                 <div>
                   <div className="title" onClick={be_admin}>
