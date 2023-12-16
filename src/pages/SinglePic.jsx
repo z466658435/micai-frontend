@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons'
 import { List, Image, Space, Avatar } from 'antd'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import avatar0 from '../static/img/0.jpg'
 import articleimg from '../static/img/loading.gif'
 import { AuthContext } from '../context/authContext'
@@ -29,152 +29,154 @@ const Single = () => {
     </Space>
   )
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`/single_profile/${params.uuid}`)
-        const dateObject = new Date(res.data.date)
-        res.data.date = new Date().getFullYear() - dateObject.getFullYear()
-        setProinfo(res.data)
-        if (res.data.img === '0') {
-          setAvatardata(avatar0)
-        } else {
-          const avatar_image = await axios.get(
-            `/single_profile/avatar/${res.data.img}`,
+  //从back-art移植过来的代码///////////////////////////////////
+  //日期格式化
+  function formatDate(inputDate) {
+    const date = new Date(inputDate) //格式化date
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    const hours = String(date.getHours()).padStart(2, '0')
+    const minutes = String(date.getMinutes()).padStart(2, '0')
+    const seconds = String(date.getSeconds()).padStart(2, '0')
+
+    return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`
+  }
+
+  function cate(category) {
+    switch (category) {
+      case '1':
+        return '协会动态'
+      case '2':
+        return '学习研习'
+      case '3':
+        return '工作相关'
+      case '4':
+        return '谈天说地'
+    }
+  }
+
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(`/single_profile/${params.uuid}`)
+      const dateObject = new Date(res.data.date)
+      res.data.date = new Date().getFullYear() - dateObject.getFullYear()
+      setProinfo(res.data)
+      console.log(res.data)
+      if (res.data.img === '0') {
+        setAvatardata(avatar0)
+      } else {
+        const avatar_image = await axios.get(
+          `/single_profile/avatar/${res.data.img}`,
+          {
+            responseType: 'blob', // 设置响应类型为 Blob
+          }
+        )
+        setAvatardata(URL.createObjectURL(avatar_image.data))
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const get_photo = async () => {
+    try {
+      const res = await axios.get(`/back/photo/${params.uuid}`)
+      console.log(res.data)
+      const tempPhotos = []
+      await Promise.all(
+        res.data.map(async (item) => {
+          const photo_image = await axios.get(
+            `/single_profile/photo/${item.img}`,
             {
               responseType: 'blob', // 设置响应类型为 Blob
             }
           )
-          setAvatardata(URL.createObjectURL(avatar_image.data))
-        }
-      } catch (err) {
-        console.log(err)
-      }
+          const imageUrl = URL.createObjectURL(photo_image.data)
+          tempPhotos.push({ imageUrl })
+        })
+      )
+      setPhotos(tempPhotos)
+    } catch (err) {
+      console.log(err)
     }
-    const get_photo = async () => {
-      try {
-        const res = await axios.get(`/back/photo/${params.uuid}`)
-        console.log(res.data)
-        const tempPhotos = []
-        await Promise.all(
-          res.data.map(async (item) => {
+  }
+
+  //拿取文章初始化数据
+  const fetchdata1 = async () => {
+    const res = await axios.get(`/back/article/${params.uuid}`)
+    console.log(res.data)
+    if (res.data.length !== 0) {
+      const tempPhotos = []
+      await Promise.all(
+        res.data.map(async (item, index) => {
+          if (item.img) {
             const photo_image = await axios.get(
-              `/single_profile/photo/${item.img}`,
+              `/picture/article_photo/${item.img}?userid=${item.user_id}`,
               {
                 responseType: 'blob', // 设置响应类型为 Blob
               }
             )
             const imageUrl = URL.createObjectURL(photo_image.data)
-            tempPhotos.push({ imageUrl })
-          })
-        )
-        setPhotos(tempPhotos)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-
-    //从back-art移植过来的代码///////////////////////////////////
-    //日期格式化
-    function formatDate(inputDate) {
-      const date = new Date(inputDate) //格式化date
-      const year = date.getFullYear()
-      const month = String(date.getMonth() + 1).padStart(2, '0')
-      const day = String(date.getDate()).padStart(2, '0')
-      const hours = String(date.getHours()).padStart(2, '0')
-      const minutes = String(date.getMinutes()).padStart(2, '0')
-      const seconds = String(date.getSeconds()).padStart(2, '0')
-
-      return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`
-    }
-
-    function cate(category) {
-      switch (category) {
-        case '1':
-          return '协会动态'
-        case '2':
-          return '学习研习'
-        case '3':
-          return '工作相关'
-        case '4':
-          return '谈天说地'
-      }
-    }
-
-    //拿取文章初始化数据
-    const fetchdata1 = async () => {
-      const res = await axios.get(`/back/article/${params.uuid}`)
-      console.log(res.data)
-      if (res.data.length !== 0) {
-        const tempPhotos = []
-        await Promise.all(
-          res.data.map(async (item, index) => {
-            if (item.img) {
-              const photo_image = await axios.get(
-                `/picture/article_photo/${item.img}?userid=${item.id}`,
-                {
-                  responseType: 'blob', // 设置响应类型为 Blob
-                }
-              )
-              const imageUrl = URL.createObjectURL(photo_image.data)
-              tempPhotos.push({ imageUrl, date: item.post_date })
-            } else {
-              tempPhotos.push({ imageUrl: articleimg, date: item.post_date })
-            }
-          })
-        )
-        // 降序排序
-        tempPhotos.sort((a, b) => {
-          const dateA = new Date(a.date)
-          const dateB = new Date(b.date)
-          return dateB - dateA
-        })
-        setarticlePhotos(tempPhotos)
-        console.log(tempPhotos)
-        //头像
-        var avatar
-        await (async () => {
-          console.log(res.data)
-          const user_img = res.data[0].user_img
-          const user_id = res.data[0].user_id
-          if (user_img === '0') {
-            avatar = avatar0
+            tempPhotos.push({ imageUrl, date: item.post_date })
           } else {
-            const avatar_image = await axios.get(
-              `/picture/image/${user_img}?userid=${user_id}`,
-              {
-                responseType: 'blob', // 设置响应类型为 Blob
-              }
-            )
-            avatar = URL.createObjectURL(avatar_image.data)
+            tempPhotos.push({ imageUrl: articleimg, date: item.post_date })
           }
-        })()
-        //重组数据
-        const data = res.data.map((item) => ({
-          id: `${item.id}`,
-          date: `${item.post_date}`,
-          title: `${item.title}`,
-          avatar: avatar,
-          description: `${item.user_name} | ${item.user_major} | ${formatDate(
-            item.post_date
-          )} | ${cate(item.category)}`,
-          content: `${item.content}`,
-          likes: `${item.likes ? item.likes.length : '0'}`,
-          comments_num: `${
-            item.comments ? JSON.parse(item.comments).comments_num : '0'
-          }`,
-          readings: `${Math.floor(item.readings)}`,
-        }))
-        data.sort((a, b) => new Date(b.date) - new Date(a.date))
-        console.log(data)
-        setArticledata(data)
-      } else {
-        console.log(1111111)
-        setArticledata([])
-      }
+        })
+      )
+      // 降序排序
+      tempPhotos.sort((a, b) => {
+        const dateA = new Date(a.date)
+        const dateB = new Date(b.date)
+        return dateB - dateA
+      })
+      setarticlePhotos(tempPhotos)
+      console.log(tempPhotos)
+      //头像
+      var avatar
+      await (async () => {
+        console.log(res.data)
+        const user_img = res.data[0].user_img
+        const user_id = res.data[0].user_id
+        if (user_img === '0') {
+          avatar = avatar0
+        } else {
+          const avatar_image = await axios.get(
+            `/picture/image/${user_img}?userid=${user_id}`,
+            {
+              responseType: 'blob', // 设置响应类型为 Blob
+            }
+          )
+          avatar = URL.createObjectURL(avatar_image.data)
+        }
+      })()
+      //重组数据
+      const data = res.data.map((item) => ({
+        id: `${item.id}`,
+        date: `${item.post_date}`,
+        title: `${item.title}`,
+        avatar: avatar,
+        description: `${item.user_name} | ${item.user_major} | ${formatDate(
+          item.post_date
+        )} | ${cate(item.category)}`,
+        content: `${item.content}`,
+        likes: `${item.likes ? item.likes.length : '0'}`,
+        comments_num: `${
+          item.comments ? JSON.parse(item.comments).comments_num : '0'
+        }`,
+        readings: `${Math.floor(item.readings)}`,
+      }))
+      data.sort((a, b) => new Date(b.date) - new Date(a.date))
+      console.log(data)
+      setArticledata(data)
+    } else {
+      console.log(1111111)
+      setArticledata([])
     }
-    fetchdata1()
+  }
 
+  useEffect(() => {
+    fetchdata1() //文章
     get_photo()
     fetchData()
   }, [])
@@ -259,43 +261,45 @@ const Single = () => {
               size="large"
               dataSource={articledata}
               renderItem={(item, index) => (
-                <List.Item
-                  key={item.title}
-                  actions={[
-                    <IconText
-                      icon={EyeOutlined}
-                      text={item.readings}
-                      key="list-vertical-like-o"
-                    />,
-                    <IconText
-                      icon={LikeOutlined}
-                      text={item.likes}
-                      key="list-vertical-like-o"
-                    />,
-                    <IconText
-                      icon={MessageOutlined}
-                      text={item.comments_num}
-                      key="list-vertical-message"
-                    />,
-                  ]}
-                  extra={
-                    <img
-                      width={272}
-                      height={180}
-                      alt="logo"
-                      src={aticlePhotos[index].imageUrl}
+                <Link to={`/singleart/${item.user_uuid}/${item.id}`}>
+                  <List.Item
+                    key={item.title}
+                    actions={[
+                      <IconText
+                        icon={EyeOutlined}
+                        text={item.readings}
+                        key="list-vertical-like-o"
+                      />,
+                      <IconText
+                        icon={LikeOutlined}
+                        text={item.likes}
+                        key="list-vertical-like-o"
+                      />,
+                      <IconText
+                        icon={MessageOutlined}
+                        text={item.comments_num}
+                        key="list-vertical-message"
+                      />,
+                    ]}
+                    extra={
+                      <img
+                        width={272}
+                        height={180}
+                        alt="logo"
+                        src={aticlePhotos[index].imageUrl}
+                      />
+                    }>
+                    <List.Item.Meta
+                      avatar={<Avatar src={item.avatar} />}
+                      title={<a href={item.href}>{item.title}</a>}
+                      description={item.description}
                     />
-                  }>
-                  <List.Item.Meta
-                    avatar={<Avatar src={item.avatar} />}
-                    title={<a href={item.href}>{item.title}</a>}
-                    description={item.description}
-                  />
-                  <div
-                    className="content"
-                    dangerouslySetInnerHTML={{ __html: item.content }}
-                  />
-                </List.Item>
+                    <div
+                      className="content"
+                      dangerouslySetInnerHTML={{ __html: item.content }}
+                    />
+                  </List.Item>
+                </Link>
               )}
             />
           </div>

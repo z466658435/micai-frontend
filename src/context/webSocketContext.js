@@ -8,7 +8,7 @@ export const useWebSocket = () => {
 }
 
 export const WebSocketProvider = ({ children }) => {
-  const [clientCount, setClientCount] = useState(0)
+  const [clientCount, setClientCount] = useState(1)
   let socket = null
 
   const initiateWebSocket = () => {

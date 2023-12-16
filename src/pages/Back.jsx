@@ -1,4 +1,4 @@
-import React, {  useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
   AppstoreOutlined,
   MailOutlined,
@@ -7,12 +7,7 @@ import {
 } from '@ant-design/icons'
 import micaiLogo from '../static/img/micai.ico'
 import { AuthContext } from '../context/authContext'
-import {
-  Space,
-  Menu,
-  Alert,
-  ConfigProvider,
-} from 'antd'
+import { Space, Menu, Alert, ConfigProvider } from 'antd'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import 'react-quill/dist/quill.snow.css' //富文本编辑器
@@ -274,7 +269,8 @@ function Back() {
     access_confirm()
 
     const handleResize = () => {
-      if (screenWidth <= 900) {
+      const screenWidth1 = window.innerWidth
+      if (screenWidth1 <= 900) {
         setIsMenuOpen(false)
         setIfBigScreen(false) // 如果屏幕宽度小于等于900px，自动关闭菜单
       } else {

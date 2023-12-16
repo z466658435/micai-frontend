@@ -12,8 +12,9 @@ import {
   ConfigProvider,
 } from 'antd'
 import axios from 'axios'
-import avatar0 from '../static/img/0.jpg'
 import Footer from '../components/Footer'
+import avatar0 from '../static/img/0.jpg'
+import loading from '../static/img/loading2.webp'
 
 const { Meta } = Card
 const { Search } = Input
@@ -22,6 +23,7 @@ const Picture = () => {
   const [members, setMembers] = useState([])
   const [fresh, setFresh] = useState(false)
   const [imageUrls, setImageUrls] = useState([])
+  const [carouselImageUrls, setCarouselImageUrls] = useState([loading])
 
   const demos = [
     {
@@ -70,14 +72,14 @@ const Picture = () => {
 
   //轮播图
   const contentStyle = {
-    height: '300px',
+    height: '400px',
     color: '#fff',
-    lineHeight: '300px',
+    lineHeight: '400px',
     textAlign: 'center',
     background: '#364d79',
   }
 
-  // 更新图像URL的函数
+  // 搜索更新图像URL的函数
   const updateImageUrls = (data) => {
     const urls = data.map(async (item) => {
       if (item.img === '0') {
@@ -89,6 +91,7 @@ const Picture = () => {
             responseType: 'blob',
           }
         )
+        console.log(avatar_image.data)
         return URL.createObjectURL(avatar_image.data)
       }
     })
@@ -204,21 +207,29 @@ const Picture = () => {
     const type = 0
     const fetchall = async () => {
       try {
-        const res = await axios.get(`/init_data/pic/${0}/${type}`)
+        const res = await axios.get(`/init_data/pic/${0}/${type}`) //只展示更改过初始姓名的用户
         const filter_data = res.data.filter((item) => item.img !== '0') //只展示换过初始头像的用户
         updateImageUrls(filter_data)
         setMembers(filter_data)
         // console.log(res.data)
         // console.log(filter_data)
+        const res1 = await axios.get(`/init_data/carousel`)
+        const blobArray = res1.data.map((buffer) => {
+          const uint8Array = new Uint8Array(buffer.data)
+          return new Blob([uint8Array], { type: 'image/png' })
+        })
+        const dataUrls = blobArray.map((blob) => URL.createObjectURL(blob))
+
+        setCarouselImageUrls(dataUrls)
+        console.log(blobArray)
+        console.log(dataUrls)
+
         const currentPage1Element = document.querySelector(
           '.ant-pagination-item-1'
         )
         if (currentPage === 1 && currentPage1Element) {
           currentPage1Element.classList.add('ant-pagination-item-active')
         }
-        // console.log(66666)
-        // console.log(currentPage)
-        // console.log(66666)
       } catch (err) {
         console.log(err)
       }
@@ -258,18 +269,15 @@ const Picture = () => {
           </div>
           <div className="carousel">
             <Carousel autoplay>
-              <div>
-                <h3 style={contentStyle}>1</h3>
-              </div>
-              <div>
-                <h3 style={contentStyle}>2</h3>
-              </div>
-              <div>
-                <h3 style={contentStyle}>3</h3>
-              </div>
-              <div>
-                <h3 style={contentStyle}>4</h3>
-              </div>
+              {carouselImageUrls.map((imageUrl, index) => (
+                <div key={index} className="carouselimg">
+                  <img
+                    src={imageUrl}
+                    alt={`carousel-item-${index}`}
+                    style={contentStyle}
+                  />
+                </div>
+              ))}
             </Carousel>
           </div>
           <div className="main">

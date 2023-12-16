@@ -8,6 +8,17 @@ import carousel2 from '../static/img/carousel02.png'
 import carousel3 from '../static/img/carousel03.png'
 import carousel4 from '../static/img/carousel04.png'
 import carousel5 from '../static/img/carousel05.png'
+import xjtjunxun from '../static/img/carousel/xjtjunxun.png'
+import junshitiyanri from '../static/img/carousel/junshitiyanri.jpg'
+import chiqiang from '../static/img/carousel/chiqiang.jpg'
+import help from '../static/img/carousel/help.jpg'
+import junxunpeixun from '../static/img/carousel/junxunpeixun.png'
+import xueshengjunxun from '../static/img/carousel/xueshengjunxun.png'
+import peace from '../static/img/carousel/peace.png'
+import tuanjian from '../static/img/carousel/tuanjian.jpg'
+import tubu from '../static/img/carousel/tubu.jpg'
+import woqiang from '../static/img/carousel/woqiang.jpg'
+import biaozhang from '../static/img/carousel/biaozhang.jpg'
 import {
   LoadingOutlined,
   SmileOutlined,
@@ -293,17 +304,14 @@ const Home = () => {
             <img src={micaiLogo} alt="" />
           </div> */}
           <div className="text">
-            <span className="p1">南京工业大学</span>
+            <span className="p1">南工</span>
             <span className="p11">
-              迷彩协会
+              迷彩
               {/* <img src={micaiLogo} /> */}
             </span>
             <p className="p2">NJTECH CAMOUFLAGE ASSOCIATION</p>
             <p className="p3">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
-              ducimus velit sunt! Deleniti adipisci placeat quaerat excepturi
-              quibusdam quas, aut qui eum vitae eligendi magni nobis? Quia
-              repellendus laborum laudantium.
+              南工迷彩协会是南京工业大学武装部领导的由退伍大学生组成的组织，旨在传承军事文化、促进会员全面发展，通过军事培训、体能训练和社会服务活动，弘扬爱国主义精神
             </p>
             <a href="https://www.gfbzb.gov.cn/">
               <div className="button">
@@ -376,9 +384,9 @@ const Home = () => {
           </div>
           <div className="seccontent">
             <div className="sectext">
-              <h1>关于我们</h1>
+              <h1>关于协会</h1>
               <h4>
-                迷彩协会是由大学里的退伍大学生自发组成的组织，旨在维护和传承军队文化，促进大学生的全面发展。
+                南工迷彩协会是南京工业大学武装部领导的由退伍大学生组成的组织，旨在传承军事文化、促进会员全面发展，通过军事培训、体能训练和社会服务活动，弘扬爱国主义精神
               </h4>
             </div>
           </div>
@@ -388,28 +396,28 @@ const Home = () => {
               <div className="swiper swiper-3d">
                 <div className="swiper-wrapper">
                   <div className="swiper-slide">
-                    <img src={carousel1} />
-                    <p>北京冬奥会迎来倒计时一个月</p>
+                    <img src={peace} />
+                    <p>12•13 国家公祭日</p>
                   </div>
                   <div className="swiper-slide">
-                    <img src={carousel2} />
-                    <p>北京冬奥会迎来倒计时一个月</p>
+                    <img src={junxunpeixun} />
+                    <p>军训教官培训</p>
                   </div>
                   <div className="swiper-slide">
-                    <img src={carousel3} />
-                    <p>北京冬奥会迎来倒计时一个月</p>
+                    <img src={tuanjian} />
+                    <p>协会团队建设</p>
                   </div>
                   <div className="swiper-slide">
-                    <img src={carousel4} />
-                    <p>北京冬奥会迎来倒计时一个月</p>
+                    <img src={junshitiyanri} />
+                    <p>军事体验日</p>
                   </div>
                   <div className="swiper-slide">
-                    <img src={carousel5} />
-                    <p>北京冬奥会迎来倒计时一个月</p>
+                    <img src={xueshengjunxun} />
+                    <p>协助学生军训</p>
                   </div>
                   <div className="swiper-slide">
-                    <img src={carousel5} />
-                    <p>北京冬奥会迎来倒计时一个月</p>
+                    <img src={biaozhang} />
+                    <p>获奖表彰</p>
                   </div>
                 </div>
               </div>
@@ -418,15 +426,15 @@ const Home = () => {
         </div>
         <div className="third">
           <div className="third_title">
-            <h1>协会活动</h1>
+            <h1>协会任务</h1>
           </div>
           <div className="posts">
             <div className="post post1">
               <div className="postimg">
-                <img src={carousel1} alt="" />
+                <img src={help} alt="" />
               </div>
               <div className="content">
-                <div className="h2">我是标题</div>
+                <div className="h2">协助校武装部</div>
                 <div className="p">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit
                   aspernatur consequatur error exercitationem, nam explicabo
@@ -437,10 +445,10 @@ const Home = () => {
             </div>
             <div className="post post2">
               <div className="postimg">
-                <img src={carousel1} alt="" />
+                <img src={xjtjunxun} alt="" />
               </div>
               <div className="content">
-                <div className="h2">我是标题</div>
+                <div className="h2">参与学生军训</div>
                 <div className="p">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit
                   aspernatur consequatur error exercitationem, nam explicabo
@@ -454,7 +462,7 @@ const Home = () => {
                 <img src={carousel1} alt="" />
               </div>
               <div className="content">
-                <div className="h2">我是标题</div>
+                <div className="h2">驻守学生办公室</div>
                 <div className="p">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit
                   aspernatur consequatur error exercitationem, nam explicabo

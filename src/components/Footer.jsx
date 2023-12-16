@@ -2,7 +2,7 @@ import { React, useContext, useEffect, useState } from 'react'
 import micaiLogo from '../static/img/micai.ico'
 import qqLogo from '../static/img/footer/qqlogo.png'
 import githubLogo from '../static/img/footer/githublogo.png'
-import { Col,  Row } from 'antd'
+import { Col, Row } from 'antd'
 import { WebSocketContext } from '../context/webSocketContext'
 // import Logo from"../img/logo.png"
 
@@ -21,8 +21,12 @@ const Footer = ({ ifHome = true }) => {
           <h2>NJTECH CAMOUFLAGE ASSOCIATION</h2>
         </div>
         <div className="title02">
-          <img src={githubLogo} />
-          <img src={qqLogo} />
+          <a href="https://github.com/z466658435">
+            <img src={githubLogo} />
+          </a>
+          <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=466658435&website=www.oicqzone.com">
+            <img src={qqLogo} />
+          </a>
         </div>
       </div>
       <hr className="footerhr" />

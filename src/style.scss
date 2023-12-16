@@ -235,10 +235,10 @@
                 flex-direction: column;
               }
               .basicbox {
-                width: 350px;
-                order: 2;
+                flex: 3;
                 @media (max-width: 650px) {
                   margin: 0 auto 50px;
+                  order: 2;
                 }
                 .basic {
                   min-width: 280px;
@@ -250,8 +250,9 @@
                   }
                   .flex {
                     display: flex;
+                    width: 350px;
                     height: 40px;
-                    margin-top: 10px;
+                    margin: 10px auto 0;
                     .datepicker {
                       height: 40px;
                       width: 180px;
@@ -313,9 +314,10 @@
               .avatarbox0 {
                 width: auto;
                 display: flex;
-                order: 1;
+                flex: 2;
                 @media (max-width: 650px) {
                   margin: 0 auto;
+                  order: 1;
                 }
                 .avatarbox {
                   margin-top: 60px;
@@ -1475,6 +1477,8 @@
           #carousel .swiper-slide img {
             display: block;
             width: 100%;
+            height: 15vw;
+            min-height: 100%;
           }
           #carousel .swiper-slide p {
             line-height: 58px;
@@ -1482,8 +1486,13 @@
             padding-top: 0;
             text-align: center;
             color: #636363;
-            font-size: 0.8em;
+            font-size: 1em;
             margin: 0;
+            @media (max-width: 1000px) {
+              line-height: 35px;
+              max-height: 35px;
+              font-size: 0.8em;
+            }
           }
 
           #carousel .swiper-pagination {
@@ -2268,7 +2277,14 @@
             background-color: $main_articleColor;
             .ant-list-items {
               background-color: $main_articleColor;
-              margin-top: 20px;
+              overflow: hidden;
+            }
+            .ant-list-item:hover {
+              transform: translate(2px, 2px);
+              background-color: rgba($color: #4d4d4d, $alpha: 0.1);
+              transition: 0.5s;
+              border-radius: 5px;
+              cursor: pointer;
             }
             .content {
               display: -webkit-box;
@@ -2917,7 +2933,7 @@
       background-image: linear-gradient(
           to bottom,
           rgba(255, 255, 255, 0) 800px,
-          rgba(50, 51, 53, 1) 1550px
+          rgba(50, 51, 53, 1) 1650px
         ),
         url('../src/static/background/bg.jpg');
       background-size: cover;
@@ -2943,8 +2959,14 @@
           }
         }
         .carousel {
-          width: 100%;
-          height: auto;
+          width: 60%;
+          height: 400px;
+          margin: 0 auto;
+          img {
+            margin: 0 auto;
+            width: 100%;
+            height: 100%;
+          }
         }
         .main {
           display: flex;
