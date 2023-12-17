@@ -3,11 +3,6 @@ import Swiper from 'swiper'
 import '../static/plugins/swiper-bundle.min.css'
 import first_bgpng from '../static/home_medium/first_bg.png'
 import first_bgmp4 from '../static/home_medium/first_bg.mp4'
-import carousel1 from '../static/img/carousel01.png'
-import carousel2 from '../static/img/carousel02.png'
-import carousel3 from '../static/img/carousel03.png'
-import carousel4 from '../static/img/carousel04.png'
-import carousel5 from '../static/img/carousel05.png'
 import xjtjunxun from '../static/img/carousel/xjtjunxun.png'
 import junshitiyanri from '../static/img/carousel/junshitiyanri.jpg'
 import chiqiang from '../static/img/carousel/chiqiang.jpg'
@@ -19,6 +14,7 @@ import tuanjian from '../static/img/carousel/tuanjian.jpg'
 import tubu from '../static/img/carousel/tubu.jpg'
 import woqiang from '../static/img/carousel/woqiang.jpg'
 import biaozhang from '../static/img/carousel/biaozhang.jpg'
+import bangongshi from '../static/img/carousel/bangongshi.jpg'
 import {
   LoadingOutlined,
   SmileOutlined,
@@ -311,7 +307,8 @@ const Home = () => {
             </span>
             <p className="p2">NJTECH CAMOUFLAGE ASSOCIATION</p>
             <p className="p3">
-              南工迷彩协会是南京工业大学武装部领导的由退伍大学生组成的组织，旨在传承军事文化、促进会员全面发展，通过军事培训、体能训练和社会服务活动，弘扬爱国主义精神
+              
+              南工迷彩协会，是由校武装部统一领导的退役大学生士兵组织。协会旨在传承军事文化，弘扬爱国主义精神。
             </p>
             <a href="https://www.gfbzb.gov.cn/">
               <div className="button">
@@ -386,7 +383,7 @@ const Home = () => {
             <div className="sectext">
               <h1>关于协会</h1>
               <h4>
-                南工迷彩协会是南京工业大学武装部领导的由退伍大学生组成的组织，旨在传承军事文化、促进会员全面发展，通过军事培训、体能训练和社会服务活动，弘扬爱国主义精神
+              在校武装部领导下，南工迷彩协会参与各类活动，发扬退役军人的优良作风。协会成员运用在服役期间的所知所学，解决身边同学的实际困难。协会还积极投身志愿服务活动，使退役士兵在社会上继续发光发热。通过参与协会活动，退役大学生士兵的个人素质得到全面发展。协会的凝聚力不断增强，协会发展蒸蒸日上
               </h4>
             </div>
           </div>
@@ -434,12 +431,9 @@ const Home = () => {
                 <img src={help} alt="" />
               </div>
               <div className="content">
-                <div className="h2">协助校武装部</div>
+                <div className="h2">参与志愿服务</div>
                 <div className="p">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit
-                  aspernatur consequatur error exercitationem, nam explicabo
-                  nihil aperiam culpa. Asperiores, amet aut repellendus nobis
-                  soluta aliquid officia. Perferendis doloremque nobis ratione.
+                协会在校武装部的领导下，参与校内校外的志愿服务活动。协会成员冲锋一线，不怕苦不畏难，勇挑重担，给人们提供帮助。成员始终铭记军队优良传统，铭记退伍不褪色的铮铮誓言，在一次次的志愿服务活动中提升个人能力，实现自我价值。
                 </div>
               </div>
             </div>
@@ -450,24 +444,18 @@ const Home = () => {
               <div className="content">
                 <div className="h2">参与学生军训</div>
                 <div className="p">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit
-                  aspernatur consequatur error exercitationem, nam explicabo
-                  nihil aperiam culpa. Asperiores, amet aut repellendus nobis
-                  soluta aliquid officia. Perferendis doloremque nobis ratione.
+                在大学生军训期间，协会积极参与，提供帮助。协会成员通过在服役期间习得的各项知识技能，帮助军训大学生尽快度过适应期。协会通过宣扬军队政策，提高大学生参军报国的热情。协会弘扬爱国主义精神，提升大学生的家国情怀。协会在军训期间提供有力支持和帮助。
                 </div>
               </div>
             </div>
             <div className="post post3">
               <div className="postimg">
-                <img src={carousel1} alt="" />
+                <img src={bangongshi} alt="" />
               </div>
               <div className="content">
-                <div className="h2">驻守学生办公室</div>
+                <div className="h2">校园驻守值班</div>
                 <div className="p">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit
-                  aspernatur consequatur error exercitationem, nam explicabo
-                  nihil aperiam culpa. Asperiores, amet aut repellendus nobis
-                  soluta aliquid officia. Perferendis doloremque nobis ratione.
+                为了给身边同学提供帮助，在校武装部领导下，学校开设有宿舍服务站和校自管会。协会成员广泛参与，成为其中的骨干力量。服务站分布于校园各地，在身边同学遇到困难时，协会成员及时前往进行解决。在校自管会中，协会成员维持应有的秩序，为自习的同学提供热心的服务。
                 </div>
               </div>
             </div>

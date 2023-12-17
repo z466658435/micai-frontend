@@ -133,7 +133,7 @@ const Register = () => {
         return
       }
     }
-    if (isEmailValid === true) {
+    if (isEmailValid === 1) {
       try {
         const res = await axios.get(`auth/email_send/${reginputs.username}`)
         console.log(res.data)
@@ -178,6 +178,7 @@ const Register = () => {
         })
       }
     } else {
+      console.log(456456456)
       api.info({
         message: `邮箱验证码`,
         description: `邮箱格式输入错误，无法发送！`,

@@ -23,7 +23,7 @@ const Picture = () => {
   const [members, setMembers] = useState([])
   const [fresh, setFresh] = useState(false)
   const [imageUrls, setImageUrls] = useState([])
-  const [carouselImageUrls, setCarouselImageUrls] = useState([loading])
+  const [carouselImageUrls, setCarouselImageUrls] = useState([])
 
   const demos = [
     {
@@ -246,6 +246,46 @@ const Picture = () => {
     }
   }, [fresh])
 
+  useEffect(() => {
+    //carousel无限滚动轮播图
+    if (document.querySelector('.carousel-slide')) {
+      //加载出来之后运行
+      let list = document.querySelector('.list')
+      let box = document.querySelector('.box')
+      let carouselSlideWidth =
+        document.querySelector('.carousel-slide').offsetWidth // 获取单个轮播项的宽度
+      let carouselItemCount =
+        document.querySelectorAll('.carousel-slide').length // 获取轮播项的个数
+      list.innerHTML += list.innerHTML
+      let left = 0
+      let timer
+
+      function move() {
+        clearInterval(timer)
+        timer = setInterval(() => {
+          left -= 2
+          if (
+            left ===
+            -(carouselItemCount * carouselSlideWidth + carouselItemCount * 2)
+          ) {
+            left = 0
+          }
+          list.style.left = left + 'px'
+        }, 20)
+      }
+
+      move()
+
+      box.onmouseenter = () => {
+        clearInterval(timer)
+      }
+
+      box.onmouseleave = () => {
+        move()
+      }
+    } 
+  }, [carouselImageUrls])
+
   const collegetitle = () => {
     setFresh(true)
     const selectedItem = document.querySelectorAll('.ant-menu-item-selected')[0]
@@ -268,17 +308,15 @@ const Picture = () => {
             <span>成员相册</span>
           </div>
           <div className="carousel">
-            <Carousel autoplay>
-              {carouselImageUrls.map((imageUrl, index) => (
-                <div key={index} className="carouselimg">
-                  <img
-                    src={imageUrl}
-                    alt={`carousel-item-${index}`}
-                    style={contentStyle}
-                  />
-                </div>
-              ))}
-            </Carousel>
+            <div class="box">
+              <div class="list">
+                {carouselImageUrls.map((imageUrl, index) => (
+                  <div key={index} className="carousel-slide">
+                    <img src={imageUrl} alt={`carousel-item-${index}`} />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="main">
             <div className="box1">
